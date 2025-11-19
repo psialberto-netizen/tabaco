@@ -246,19 +246,19 @@
                 
                 <div class="context-card">
                     <h3>¿Qué es el Tabaco?</h3>
-                                        <p class="text-sm">El tabaco (o vapeo) es una <strong>droga estimulante</strong>. Contiene <strong>Nicotina</strong>, una de las sustancias más adictivas. Al inhalar el humo, recibes más de 7,000 sustancias químicas (como alquitrán y cianuro). ¡Al menos 70 pueden causar <strong>cáncer</strong>!</p>
+                    <p class="text-sm">El tabaco (o vapeo) es una <strong>droga estimulante</strong>. Contiene <strong>Nicotina</strong>, una de las sustancias más adictivas. Al inhalar el humo, recibes más de 7,000 sustancias químicas (como alquitrán y cianuro). ¡Al menos 70 pueden causar <strong>cáncer</strong>!</p>
                     <p class="mt-2 text-xs font-semibold text-green-700">Clasificación: Droga Estimulante</p>
                 </div>
 
                 <div class="context-card">
                     <h3>Efectos Inmediatos vs. Abstinencia</h3>
-                                        <p class="text-sm"><strong>Efectos Inmediatos:</strong> Sensación de alerta, estimulación y mareo. Falsa percepción de relajación y concentración.</p>
-                    <p class="mt-2 text-sm"><strong>Síndrome de Abstinencia:</strong> Es el peor ciclo. Si dejas de fumar, sientes: Deseo incontrolable, irritabilidad, dificultad para concentrarte, aumento de apetito y **ansiedad** o estados depresivos.</p>
+                    <p class="text-sm"><strong>Efectos Inmediatos:</strong> Sensación de alerta, estimulación y mareo. Falsa percepción de relajación y concentración.</p>
+                    <p class="mt-2 text-sm"><strong>Síndrome de Abstinencia:</strong> Es el peor ciclo. Si dejas de fumar, sientes: Deseo incontrolable, irritabilidad, dificultad para concentrarte, aumento de apetito y <strong>ansiedad</strong> o estados depresivos.</p>
                 </div>
 
                 <div class="context-card md:col-span-2">
                     <h3>Consecuencias Clave del Consumo</h3>
-                                        <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4 text-sm">
+                    <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4 text-sm">
                         <li>Mal aliento y <strong>dientes manchados</strong>.</li>
                         <li>Dificultades para respirar y practicar deportes.</li>
                         <li>Falta de sensibilidad en papilas gustativas (la comida sabe menos).</li>
@@ -271,7 +271,7 @@
 
                 <div class="context-card md:col-span-2">
                     <h3>Otros Riesgos de Vida (¡Esto es Serio!)</h3>
-                                        <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4 text-sm">
+                    <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4 text-sm">
                         <li><strong>Cáncer</strong> de pulmón, boca, garganta, esófago, vejiga, páncreas, riñón, útero y mamas.</li>
                         <li>Complicaciones cardíacas y <strong>derrame cerebral</strong>.</li>
                         <li><strong>En hombres:</strong> Disfunción eréctil y disminución de espermatozoides.</li>
@@ -283,7 +283,7 @@
                 
                 <div class="context-card">
                     <h3>Señales de Alerta (¡Pide Ayuda!)</h3>
-                                        <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4 text-sm">
+                    <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4 text-sm">
                         <li>Mal olor en el cabello, piel y ropa.</li>
                         <li>Dedos amarillos y dientes manchados.</li>
                         <li>Baja resistencia física por falta de oxígeno.</li>
@@ -766,6 +766,7 @@
                 image: "https://placehold.co/600x120/f9fafb/374151?text=Humo+en+ambiente+cerrado"
             },
             {
+                // FIX: El texto salía separado porque estaba dividido en el array JS. Se consolida el texto.
                 mito: "Fumar un cigarro relaja y alivia el estrés.",
                 realidad: "FALSO. La nicotina es un <strong>estimulante</strong>. La sensación de 'alivio' es solo calmar la <strong>abstinencia</strong> que la misma adicción te causa.",
                 image: "https://placehold.co/600x120/f9fafb/374151?text=Joven+estresado+fumando"
@@ -776,6 +777,7 @@
                 image: "https://placehold.co/600x120/f9fafb/374151?text=Cigarros+light+no+hacen+dano"
             },
             {
+                // FIX: El texto salía separado. Se consolida el texto para evitar el error de renderizado.
                 mito: "El problema de fumar es solo mío.",
                 realidad: "FALSO. El humo libera miles de tóxicos. Quienes están a tu alrededor se vuelven <strong>fumadores pasivos</strong> y reciben las mismas sustancias dañinas.",
                 image: "https://placehold.co/600x120/f9fafb/374151?text=El+problema+de+fumar+es+solo+mio"
