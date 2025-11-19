@@ -1,0 +1,1808 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Neta del Tabaco: Tu Escudo de Prevención</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos base */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Fondo más suave */
+        }
+        /* Títulos de sección orientados a jóvenes */
+        .section-title {
+            font-weight: 800;
+            text-shadow: 2px 2px #fef08a; /* Sombra amarilla para pop */
+            color: #1e3a8a; /* Azul oscuro */
+        }
+        /* Contenedor de Información (Tarjetas de contenido) */
+        .info-card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid;
+            position: relative;
+        }
+
+        /* Acordeón (Botones de Expansión) */
+        .accordion-button {
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 700;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+            background-color: #f9fafb;
+            border-radius: 0 0 0.5rem 0.5rem;
+            padding: 0 1rem;
+        }
+        .accordion-content.open {
+            max-height: 1500px; /* Suficiente para todo el contenido */
+            padding: 1rem;
+        }
+        .accordion-arrow {
+            transform: rotate(0deg);
+            transition: transform 0.3s;
+        }
+        .accordion-arrow.open {
+            transform: rotate(180deg);
+        }
+        
+        /* Estilos específicos para las tarjetas de tóxicos */
+        .reveal-card {
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid;
+        }
+        .reveal-card:hover {
+            transform: translateY(-2px);
+        }
+        .reveal-info {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+            font-size: 0.875rem;
+        }
+        .reveal-info.open {
+            max-height: 200px; /* Suficiente para expandir el contenido */
+            padding-top: 0.5rem;
+        }
+
+        /* Colores Tarjetas Tóxicos */
+        .toxico-card { background-color: #fef2f2; border-color: #fecaca; }
+        .toxico-card:hover { background-color: #fee2e2; }
+
+        /* Colores Tarjetas Consecuencias (NUEVO) */
+        .consecuencia-card-pink { background-color: #fdf2f8; border-color: #fbcfe8; }
+        .consecuencia-card-pink:hover { background-color: #fce7f3; }
+        .consecuencia-card-yellow { background-color: #fefce8; border-color: #fef08a; }
+        .consecuencia-card-yellow:hover { background-color: #fef9c3; }
+        .consecuencia-card-blue { background-color: #eff6ff; border-color: #bfdbfe; }
+        .consecuencia-card-blue:hover { background-color: #dbeafe; }
+        
+        /* Estilos para Pestañas (Tabs) */
+        .tab-button {
+            padding: 10px 20px;
+            border-radius: 8px 8px 0 0;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        .tab-button.active {
+            background-color: #ffffff;
+            color: #1e3a8a;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .tab-button:not(.active) {
+            background-color: #e5e7eb;
+            color: #4b5563;
+        }
+
+        /* Estilos de Juegos (manteniendo el estilo anterior) */
+        .memorama-card {
+            width: 100%;
+            padding-top: 100%; 
+            position: relative;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .memorama-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+        }
+        .memorama-card.flipped .memorama-inner {
+            transform: rotateY(180deg);
+        }
+        .memorama-front, .memorama-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            line-height: 1.2;
+            text-align: center;
+        }
+        .memorama-front {
+            background-color: #f87171; color: white; border: 3px solid #dc2626; transform: rotateY(0deg);
+        }
+        .memorama-back {
+            background-color: #fee2e2; color: #b91c1c; transform: rotateY(180deg); border: 3px solid #f87171;
+        }
+        .memorama-card.matched .memorama-front {
+            background-color: #4ade80; color: #065f46;
+        }
+        .column-item {
+            padding: 0.75rem; margin: 0.5rem 0; border-radius: 0.5rem; cursor: pointer; transition: background-color 0.2s, transform 0.1s; font-weight: 600; text-align: center;
+        }
+        .column-item:active { transform: scale(0.98); }
+        .term { background-color: #dbeafe; color: #1e40af; border: 1px solid #60a5fa; }
+        .definition { background-color: #ffedd5; color: #9a3412; border: 1px solid #fcd34d; }
+        .selected-term { background-color: #4f46e5 !important; color: white !important; border-color: #3730a3 !important; }
+        .matched-item { background-color: #86efac !important; color: #166534 !important; border-color: #4ade80 !important; pointer-events: none; }
+        #word-search-grid {
+            display: grid; grid-template-columns: repeat(10, 1fr); gap: 1px; max-width: 400px; margin: 1rem auto; border: 2px solid #4f46e5;
+        }
+        .grid-cell {
+            width: 100%; padding-top: 100%; position: relative; background-color: #eef2ff; color: #4338ca; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; justify-content: center; cursor: pointer; user-select: none; transition: background-color 0.1s; touch-action: none;
+        }
+        .grid-cell-content {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+        }
+        .grid-cell.selected { background-color: #a5b4fc; }
+        .grid-cell.found { background-color: #10b981; color: white; font-weight: bold; }
+
+        /* Estilos para Imagenes en Acordeon */
+        .accordion-image {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        /* Estilos específicos para el test de consumo */
+        .consumo-question {
+            background-color: #fff;
+            border: 1px solid #e5e7eb;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+        }
+        .consumo-option {
+            margin-top: 0.5rem;
+        }
+        .consumo-option input[type="radio"] {
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header / Título Principal -->
+    <header class="bg-indigo-600 text-white shadow-xl p-6">
+        <div class="container mx-auto">
+            <h1 class="text-4xl font-black tracking-tight md:text-5xl">LA NETA DEL TABACO</h1>
+            <p class="mt-2 text-indigo-200 text-xl font-medium">¡Tu Escudo de Prevención y Habilidades para la Vida!</p>
+        </div>
+    </header>
+
+    <!-- Contenido Principal: Pestañas -->
+    <main class="container mx-auto p-4 md:p-8">
+        <div class="flex border-b-2 border-gray-300">
+            <button class="tab-button active" onclick="openTab(event, 'Temas')">Temas de Prevención</button>
+            <button class="tab-button" onclick="openTab(event, 'Test')">Test y Autoevaluación</button>
+            <button class="tab-button" onclick="openTab(event, 'Juegos')">Juegos y Retos</button>
+        </div>
+
+        <!-- Contenido de la Pestaña "Temas" -->
+        <div id="Temas" class="tab-content">
+            <div class="flex justify-between items-center mt-6 mb-8 pb-3 border-b-4 border-indigo-300">
+                <h2 class="text-4xl section-title">Nuestros Retos de Prevención</h2>
+                <button onclick="exportToPDF()" class="bg-red-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg hover:bg-red-600 transition duration-150 flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    Exportar Temas a PDF
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <button class="card-tema bg-white p-6 shadow-xl border-t-8 border-red-500" onclick="showSection('tema-1')">
+                    <h3 class="text-3xl font-extrabold text-red-700 mb-2">Tema 1: ¡Di NO con Estilo!</h3>
+                    <p class="text-gray-600 font-medium">Presión Social y Asertividad. <strong>(Habilidades Sociales)</strong></p>
+                </button>
+
+                <button class="card-tema bg-white p-6 shadow-xl border-t-8 border-blue-500" onclick="showSection('tema-2')">
+                    <h3 class="text-3xl font-extrabold text-blue-700 mb-2">Tema 2: Emociones ON/OFF</h3>
+                    <p class="text-gray-600 font-medium">Manejo de Estrés y Ansiedad. <strong>(Habilidades Emocionales)</strong></p>
+                </button>
+
+                <button class="card-tema bg-white p-6 shadow-xl border-t-8 border-green-500" onclick="showSection('tema-3')">
+                    <h3 class="text-3xl font-extrabold text-green-700 mb-2">Tema 3: Tu Poder de Decisión</h3>
+                    <p class="text-gray-600 font-medium">Balance, Autoestima y Metas. <strong>(Habilidades de Pensamiento)</strong></p>
+                </button>
+            </div>
+
+            <!-- Secciones de Contenido Detallado -->
+            <div id="content-sections" class="bg-white p-6 md:p-10 rounded-xl shadow-2xl mt-8">
+                <!-- TEMAS (Por defecto se muestra el inicio) -->
+                <div id="tema-inicio" class="content-section">
+                    <h2 class="text-3xl font-extrabold text-indigo-700 mb-4">¡Checa los Temas para empezar!</h2>
+                    <p class="text-xl text-gray-600 mb-6">Estamos aquí para darte las herramientas psicológicas y pedagógicas para que tú tomes el control de tu salud y tu futuro. ¡Toda la información es tuya!</p>
+                    <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded-lg">
+                        <p class="font-bold text-yellow-800 text-lg">⚠️ ¡Atención!</p>
+                        <p class="text-yellow-700">Recuerda que la edad más frecuente para empezar a fumar en México es entre los <strong>13 y 14 años</strong>. Si te informas ahora, ¡ya llevas ventaja!</p>
+                    </div>
+                </div>
+
+                <!-- INICIO TEMA 1 -->
+                <div id="tema-1" class="content-section hidden">
+                    <h2 class="text-3xl font-black text-red-700 mb-6">Tema 1: ¡Di NO con Estilo! (Asertividad)</h2>
+                    
+                    <!-- Acordeón: Mitos y Realidades -->
+                    <div class="mb-4">
+                        <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-mitos')">
+                            <img src="https://images.unsplash.com/photo-1518173514751-6156e30b62e4?q=80&w=1280&fit=max" alt="Dos caras, una con duda y otra con certeza" class="accordion-image mr-4">
+                            #1. ¡Desafío Mental! Mitos vs. Realidades
+                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-mitos" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="content-mitos" class="accordion-content">
+                            <p class="text-gray-700 mb-4 font-semibold">No creas todo lo que ves o escuchas. ¡Haz clic en el Mito para revelar la <strong>REALIDAD</strong>!</p>
+                            <div id="mitos-realidades-list" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <!-- Mitos y Realidades generados por JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Acordeón: Componentes Tóxicos Interactivos -->
+                    <div class="mb-4">
+                        <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-toxicos')">
+                            <img src="https://images.unsplash.com/photo-1588665301824-345339f40073?q=80&w=1280&fit=max" alt="Sustancias químicas en frascos" class="accordion-image mr-4">
+                            #2. Laboratorio Tóxico: ¿Con qué Fumas?
+                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-toxicos" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="content-toxicos" class="accordion-content">
+                            <p class="text-gray-700 mb-4 font-semibold">El humo tiene <strong>más de 7 mil químicos</strong>, muchos se usan en productos venenosos o industriales. ¡Haz clic para ver dónde terminan!</p>
+                            <div id="toxicos-list" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <!-- Componentes tóxicos generados por JS -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Acordeón: RADIOGRAFÍA DEL CIGARRO -->
+                    <div class="mb-4">
+                        <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-humo')">
+                            <img src="https://images.unsplash.com/photo-1544258838-89fa281b3152?q=80&w=1280&fit=max" alt="Humo en ambiente cerrado" class="accordion-image mr-4">
+                            #3. ¡Tu Decisión Crea 3 Tipos de Humo!
+                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-humo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="content-humo" class="accordion-content">
+                            <p class="text-gray-700 mb-2 font-semibold">Al fumar se generan tres tipos de humo, y todos son tóxicos:</p>
+                            <ul class="list-disc list-inside text-gray-700 ml-4 space-y-2">
+                                <li><strong>Humo de Primera Mano:</strong> El que inhala directamente el fumador. Llega a tus pulmones y cerebro en segundos.</li>
+                                <li><strong>Humo de Segunda Mano:</strong> Es inhalado por los <strong class="text-red-700">fumadores pasivos</strong> y contiene la mayor cantidad de tóxicos sin filtrar.</li>
+                                <li><strong>Humo de Tercera Mano:</strong> ¡El más persistente! Son los residuos tóxicos que se pegan a la ropa, el pelo, los muebles y el coche.</li>
+                            </ul>
+                            <p class="text-sm font-light italic bg-red-100 p-3 rounded-lg mt-3">Un fumador pasivo puede aspirar el equivalente a un cigarro por hora en un ambiente cerrado.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Acordeón: Efectos a Corto Plazo -->
+                    <div class="mb-4">
+                        <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-cortoplazo')">
+                            <img src="https://images.unsplash.com/photo-1547076332-ceab5060824b?q=80&w=1280&fit=max" alt="Pulmones en chequeo médico" class="accordion-image mr-4">
+                            #4. Efectos Físicos a <strong>Corto Plazo</strong> (¡Sientes el daño al momento!)
+                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-cortoplazo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="content-cortoplazo" class="accordion-content">
+                            <ul class="list-disc list-inside text-gray-700 ml-4 space-y-1">
+                                <li>Disminuye la capacidad de que los pulmones se oxigenen.</li>
+                                <li>Tos y cansancio/debilitamiento.</li>
+                                <li>Aumenta el ritmo del corazón y la presión arterial, lo que puede producir ansiedad.</li>
+                                <li>Mareo, náusea y dolor de cabeza.</li>
+                                <li>Mal olor (aliento, cabello, ropa, manos) y quemaduras en la piel.</li>
+                                <li>Pérdida del apetito.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Acordeón: Consecuencias a Largo Plazo -->
+                    <div class="mb-4">
+                        <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-largoplazo')">
+                            <img src="https://images.unsplash.com/photo-1599380696989-14a8080f074d?q=80&w=1280&fit=max" alt="Ilustración de corazón y arterias dañadas" class="accordion-image mr-4">
+                            #5. Consecuencias a <strong>Largo Plazo</strong> (¡Tu futuro en riesgo!)
+                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-largoplazo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="content-largoplazo" class="accordion-content">
+                            <img src="https://images.unsplash.com/photo-1584889104128-43d5267a5b3a?q=80&w=1280&fit=max" alt="Radiografía de pulmones mostrando daño" class="w-full h-48 object-cover rounded-lg mb-4">
+                            <ul class="list-disc list-inside text-gray-700 ml-4 space-y-1">
+                                <li><strong>Causa adicción</strong> y menos resistencia física.</li>
+                                <li><strong>Cáncer:</strong> Boca, garganta, pulmón, páncreas, riñones, sangre, entre otros.</li>
+                                <li>Pérdida importante de los sentidos (vista, olfato, gusto).</li>
+                                <li><strong>En Hombres:</strong> Disfunción eréctil y disminución de espermatozoides.</li>
+                                <li><strong>En Mujeres:</strong> Infertilidad y riesgo de abortos espontáneos.</li>
+                                <li><strong>En Menores:</strong> Limita el crecimiento físico y neuronal.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Acordeón: BENEFICIOS de Suspender su Uso (NUEVO) -->
+                    <div class="mb-4">
+                        <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-beneficios')">
+                            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1280&fit=max" alt="Corriendo en la playa sintiendo libertad" class="accordion-image mr-4">
+                            #6. ¡El Premio! Beneficios de <strong>Suspender su Uso</strong>
+                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-beneficios" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="content-beneficios" class="accordion-content">
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-center text-sm font-semibold text-gray-800">
+                                <div class="bg-red-200 p-2 rounded-lg">A los 20 min.: Presión y latidos se estabilizan.</div>
+                                <div class="bg-red-200 p-2 rounded-lg">A las 8 horas: Pulmones reciben más oxígeno.</div>
+                                <div class="bg-red-200 p-2 rounded-lg">A las 72 horas: Mejora el gusto y olfato.</div>
+                                <div class="bg-red-200 p-2 rounded-lg">15 días a 3 meses: Mejora la circulación y baja la tos.</div>
+                                <div class="bg-red-200 p-2 rounded-lg">A 1 año: Riesgo de enfermedad del corazón se reduce.</div>
+                                <div class="bg-red-200 p-2 rounded-lg">10 a 15 años: Riesgo de cáncer se reduce casi a nivel de no fumador.</div>
+                            </div>
+                            <p class="text-center font-bold mt-4 text-red-700">Además: ¡Más resistencia, mejor economía y adiós al olor a humo!</p>
+                        </div>
+                    </div>
+
+                    <!-- Acordeón: Consecuencias Psicológicas y Sociales (NUEVO) -->
+                    <div class="mb-4">
+                        <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-consecuencias')">
+                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1280&fit=max" alt="Grupo de jóvenes en discusión" class="accordion-image mr-4">
+                            #7. Consecuencias Psicológicas, Familiares y Sociales
+                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-consecuencias" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="content-consecuencias" class="accordion-content">
+                            <p class="text-gray-700 mb-4 font-semibold">Fumar no solo te daña a ti, impacta todo tu entorno. ¡Haz clic en las tarjetas para ver la neta!</p>
+                            <div id="consecuencias-list" class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <!-- Consecuencias generadas por JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Acordeón: Técnicas para decir NO -->
+                    <div class="mb-4">
+                        <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-tecnicasno')">
+                            <img src="https://images.unsplash.com/photo-1517457210348-b767079e8e7a?q=80&w=1280&fit=max" alt="Jóvenes negándose a algo" class="accordion-image mr-4">
+                            #8. Técnicas para decir NO (¡Tu poder de Asertividad!)
+                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-tecnicasno" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="content-tecnicasno" class="accordion-content">
+                            <p class="text-gray-700 mb-2 font-semibold">Usa la <strong>Asertividad</strong> (decir lo que sientes con respeto) para evitar la presión:</p>
+                            <ul class="list-disc list-inside text-gray-700 ml-4">
+                                <li><strong>Disco Rayado:</strong> Repite tu negativa con calma: *"No quiero, me hace daño. No quiero, me hace daño."*</li>
+                                <li><strong>Niebla:</strong> Acepta la crítica sin pelear y mantente firme: *"Sí, puede que me vea aburrido, pero he decidido no fumar."*</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Bloque CIJ (NUEVO) -->
+                    <div id="cij-block-1" class="mt-8 pt-6 border-t-2 border-indigo-200">
+                        <!-- CIJ Info se insertará aquí -->
+                    </div>
+
+                </div>
+                <!-- FIN TEMA 1 -->
+
+                <!-- INICIO TEMA 2 -->
+                <div id="tema-2" class="content-section hidden">
+                    <h2 class="text-3xl font-black text-blue-700 mb-6">Tema 2: Emociones ON/OFF (Manejo Emocional)</h2>
+
+                    <!-- Acordeón: Mito Derribado -->
+                    <div class="mb-4">
+                        <button class="accordion-button bg-blue-100 text-blue-700 hover:bg-blue-200" onclick="toggleAccordion('content-mito')">
+                            <img src="https://images.unsplash.com/photo-1544377193-3e11739f75a7?q=80&w=1280&fit=max" alt="Joven estresado fumando (Mito)" class="accordion-image mr-4">
+                            #1. ¡Mito Derribado! El Tabaco NO Relaja
+                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-mito" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="content-mito" class="accordion-content">
+                            <p class="text-gray-700 mb-2 font-semibold">Psicológicamente, la nicotina es un estimulante. Si sientes "alivio" al fumar, es solo porque estás calmando la <strong>ABSTINENCIA</strong> que tu propio cuerpo ya te pide por la adicción.</p>
+                            <p class="text-sm italic text-blue-800 bg-blue-100 p-3 rounded-lg">Fumar acelera tu corazón y te pone más tenso/a a largo plazo. ¡No resuelve el estrés!</p>
+                        </div>
+                    </div>
+
+                    <!-- Acordeón: Control de Enojo -->
+                    <div class="mb-4">
+                        <button class="accordion-button bg-blue-100 text-blue-700 hover:bg-blue-200" onclick="toggleAccordion('content-enojo')">
+                            <img src="https://images.unsplash.com/photo-1558284560-934336c1a82f?q=80&w=1280&fit=max" alt="Joven frustrado o enojado" class="accordion-image mr-4">
+                            #2. El Control Remoto de tu Enojo
+                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-enojo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="content-enojo" class="accordion-content">
+                            <p class="text-gray-700 mb-2 font-semibold">Si el enojo te lleva a hacer cosas que te perjudican (como fumar o pelear), usa estas técnicas:</p>
+                            <ul class="list-disc list-inside text-gray-700 ml-4">
+                                <li><strong>Tiempo Fuera:</strong> Aléjate del lugar y de la persona que te molesta. ¡Necesitas enfriarte!</li>
+                                <li><strong>Autoverbalizaciones:</strong> Repite mentalmente: *"Calma"*, *"Esto no vale la pena"*, *"Lo hablaré cuando esté tranquilo/a"* .</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Acordeón: Técnica Antiestrés -->
+                    <div class="mb-4">
+                        <button class="accordion-button bg-blue-100 text-blue-700 hover:bg-blue-200" onclick="toggleAccordion('content-antiestres')">
+                            <img src="https://images.pexels.com/photos/3845625/pexels-photo-3845625.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Persona meditando calmadamente" class="accordion-image mr-4">
+                            #3. Técnica Antiestrés: Respiración 4x4
+                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-antiestres" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="content-antiestres" class="accordion-content">
+                            <p class="text-gray-700 mb-2 font-semibold">Usa tu respiración para apagar la ansiedad, es 100% natural:</p>
+                            <ol class="list-decimal list-inside text-gray-700 ml-4">
+                                <li>Inhala lentamente contando hasta 4.</li>
+                                <li>Mantén el aire por 4 segundos.</li>
+                                <li>Exhala lentamente contando hasta 4.</li>
+                            </ol>
+                            <p class="text-sm italic mt-2">¡Repite 5 veces! Es un reseteo instantáneo para tu sistema nervioso.</p>
+                        </div>
+                    </div>
+
+                    <!-- Bloque CIJ (NUEVO) -->
+                    <div id="cij-block-2" class="mt-8 pt-6 border-t-2 border-indigo-200">
+                        <!-- CIJ Info se insertará aquí -->
+                    </div>
+                </div>
+                <!-- FIN TEMA 2 -->
+
+                <!-- INICIO TEMA 3 -->
+                <div id="tema-3" class="content-section hidden">
+                    <h2 class="text-3xl font-black text-green-700 mb-6">Tema 3: Tu Poder de Decisión (Autoestima y Metas)</h2>
+                    
+                    <!-- Acordeón: La Balanza -->
+                    <div class="mb-4">
+                        <button class="accordion-button bg-green-100 text-green-700 hover:bg-green-200" onclick="toggleAccordion('content-balanza')">
+                            <img src="https://images.unsplash.com/photo-1590403758364-b040a4555025?q=80&w=1280&fit=max" alt="Una balanza de justicia" class="accordion-image mr-4">
+                            #1. La Balanza de tu Decisión (Balance Decisional)
+                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-balanza" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="content-balanza" class="accordion-content">
+                            <p class="text-gray-700 mb-2 font-semibold">Antes de hacer algo, ponlo en una balanza. Decidir bien es ver el panorama completo.</p>
+                            <p class="text-sm italic bg-green-100 p-3 rounded-lg"><strong>Ventajas de Fumar:</strong> ¿"Me relajo"?, ¿"Quedo bien"? <strong>Desventajas de Fumar:</strong> Cáncer, mal aliento, menos dinero, pérdida de resistencia, adicción. <strong>¡La balanza siempre cae a las desventajas!</strong></p>
+                        </div>
+                    </div>
+
+                    <!-- Acordeón: Factores de Riesgo (Reubicado) -->
+                    <div class="mb-4">
+                        <button class="accordion-button bg-green-100 text-green-700 hover:bg-green-200" onclick="toggleAccordion('content-factores')">
+                            <img src="https://images.unsplash.com/photo-1593113598733-4b6795f51954?q=80&w=1280&fit=max" alt="Adolescente reflexivo" class="accordion-image mr-4">
+                            #2. Factores de Riesgo (Familiar y Social)
+                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-factores" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="content-factores" class="accordion-content">
+                            <p class="text-gray-700 mb-4">Estos factores externos pueden aumentar el riesgo. Identificarlos es el primer paso para cambiar la situación.</p>
+                            <div id="risk-factors-checklist" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm font-medium">
+                                <!-- Los checkboxes se renderizan con JS -->
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Acordeón: Autoestima -->
+                    <div class="mb-4">
+                        <button class="accordion-button bg-green-100 text-green-700 hover:bg-green-200" onclick="toggleAccordion('content-autoestima')">
+                            <img src="https://images.unsplash.com/photo-1533228385265-d60232490d18?q=80&w=1280&fit=max" alt="Joven con brazos levantados celebrando" class="accordion-image mr-4">
+                             #3. Tu Escudo Protector: ¡La Autoestima!
+                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-autoestima" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="content-autoestima" class="accordion-content">
+                            <p class="text-gray-700 mb-2 font-semibold">Una <strong>Autoestima Alta</strong> te da la seguridad para ser tú mismo/a y rechazar lo que te hace daño. Acéptate y no busques la aprobación de otros.</p>
+                            <p class="text-sm italic">Piensa en tu <strong>Árbol de Vida</strong>: <strong>Raíces</strong> (tus cualidades), <strong>Ramas</strong> (tus habilidades), <strong>Frutos</strong> (tus logros). ¡Crea un futuro fuerte!</p>
+                        </div>
+                    </div>
+
+
+                    <!-- Bloque CIJ (NUEVO) -->
+                    <div id="cij-block-3" class="mt-8 pt-6 border-t-2 border-indigo-200">
+                        <!-- CIJ Info se insertará aquí -->
+                    </div>
+                </div>
+                <!-- FIN TEMA 3 -->
+            </div>
+        </div>
+        
+        <!-- Contenido de la Pestaña "Test y Autoevaluación" (NUEVO) -->
+        <div id="Test" class="tab-content hidden">
+             <h2 class="text-4xl section-title mt-6 mb-8 pb-3 border-b-4 border-indigo-300">Test y Autoevaluación</h2>
+
+            <!-- Acordeón: Test de Asertividad -->
+            <div class="mb-4">
+                <button class="accordion-button bg-indigo-100 text-indigo-700 hover:bg-indigo-200" onclick="toggleAccordion('content-asertividad-test')">
+                    <img src="https://images.unsplash.com/photo-1627843058865-c3286f9d3b0c?q=80&w=1280&fit=max" alt="Persona con un checklist gigante" class="accordion-image mr-4">
+                    #1. ¿Qué Estilo de Comunicación Tienes? (Test de Asertividad)
+                    <svg class="w-4 h-4 accordion-arrow" id="arrow-content-asertividad-test" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="content-asertividad-test" class="accordion-content">
+                    <p class="text-gray-700 mb-4">Descubre si tu forma de hablar es **Pasiva, Agresiva o Asertiva**. ¡Marca con cuál te identificas más!</p>
+                    <div id="asertividad-questions-container" class="space-y-4">
+                        <!-- Preguntas generadas por JS -->
+                    </div>
+                    <button class="mt-4 w-full bg-indigo-600 text-white font-bold py-2 px-4 rounded hover:bg-indigo-700 transition" onclick="checkAsertividadTest()">
+                        Ver mi Estilo de Comunicación
+                    </button>
+                    <div id="asertividad-result" class="mt-4 p-4 rounded-lg hidden">
+                        <!-- El resultado se inserta aquí -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acordeón: Test Consumo (MIGRADO DEL TEMA 3) -->
+            <div class="mb-4">
+                <button class="accordion-button bg-green-100 text-green-700 hover:bg-green-200" onclick="toggleAccordion('content-consumo-test')">
+                    <img src="https://images.unsplash.com/photo-1542838132-9097e3a9a850?q=80&w=1280&fit=max" alt="Cuestionario o evaluación médica" class="accordion-image mr-4">
+                    #2. ¿Qué Tanto Fumas? (Test de Evaluación de Consumo)
+                    <svg class="w-4 h-4 accordion-arrow" id="arrow-content-consumo-test" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="content-consumo-test" class="accordion-content">
+                    <p class="text-gray-700 mb-4">Evalúa tu consumo en los últimos 3 meses y descubre tu nivel de riesgo. ¡Sé honesto!</p>
+                    <div id="consumo-questions-container">
+                        <!-- Preguntas generadas por JS -->
+                    </div>
+                    <button id="consumo-test-button" class="mt-4 w-full bg-green-600 text-white font-bold py-2 px-4 rounded hover:bg-green-700 transition" onclick="checkConsumoTest()">
+                        Ver mi Nivel de Riesgo
+                    </button>
+                    <div id="consumo-result" class="mt-4 p-4 rounded-lg hidden">
+                        <!-- El resultado se inserta aquí -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acordeón: Semaforo de Alerta (MIGRADO DEL TEMA 3) -->
+            <div class="mb-4">
+                <button class="accordion-button bg-yellow-100 text-yellow-700 hover:bg-yellow-200" onclick="toggleAccordion('content-semaforo')">
+                    <img src="https://images.unsplash.com/photo-1542838132-9097e3a9a850?q=80&w=1280&fit=max" alt="Señales de alerta o semáforo" class="accordion-image mr-4">
+                    #3. ¡Semáforo de Alerta! ¿Necesitas ayuda?
+                    <svg class="w-4 h-4 accordion-arrow" id="arrow-content-semaforo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="content-semaforo" class="accordion-content">
+                    <p class="text-gray-700 mb-4">Marca las señales de alerta. Al terminar, recibirás un mensaje asertivo.</p>
+                    <div id="semaforo-checklist" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm font-medium">
+                        <!-- El checklist se renderiza con JS -->
+                    </div>
+                    <button id="semaforo-check-button" class="mt-4 w-full bg-green-600 text-white font-bold py-2 px-4 rounded hover:bg-green-700 transition" onclick="checkSemaforo()">
+                        Ver mi resultado
+                    </button>
+                    <div id="semaforo-result" class="mt-4 p-4 rounded-lg hidden">
+                        <!-- El resultado se inserta aquí -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acordeón: Test ÁMBITO PERSONAL (MIGRADO DEL TEMA 3) -->
+            <div class="mb-4">
+                <button class="accordion-button bg-indigo-100 text-indigo-700 hover:bg-indigo-200" onclick="toggleAccordion('content-personal-test')">
+                     <img src="https://images.unsplash.com/photo-1627843058865-c3286f9d3b0c?q=80&w=1280&fit=max" alt="Persona con un checklist gigante" class="accordion-image mr-4">
+                    #4. ¿Qué Tanta Protección Tienes? (Test Personal)
+                    <svg class="w-4 h-4 accordion-arrow" id="arrow-content-personal-test" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="content-personal-test" class="accordion-content">
+                    <p class="text-gray-700 mb-4">¡Checa si tus hábitos personales te dan la **protección** que necesitas! Marca los factores que apliquen en tu vida.</p>
+                    <div id="personal-test-checklist" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm font-medium">
+                        <!-- El checklist de Ámbito Personal se renderiza con JS -->
+                    </div>
+                    <button id="personal-test-button" class="mt-4 w-full bg-indigo-600 text-white font-bold py-2 px-4 rounded hover:bg-indigo-700 transition" onclick="checkPersonalTest()">
+                        Analizar mi Potencial
+                    </button>
+                    <div id="personal-test-result" class="mt-4 p-4 rounded-lg hidden">
+                        <!-- El resultado se inserta aquí -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bloque CIJ (NUEVO) -->
+            <div id="cij-block-test" class="mt-8 pt-6 border-t-2 border-indigo-200">
+                <!-- CIJ Info se insertará aquí -->
+            </div>
+        </div>
+
+        <!-- Contenido de la Pestaña "Juegos" -->
+        <div id="Juegos" class="tab-content hidden">
+            <h2 class="text-4xl section-title mt-6 mb-6">¡Hora de Jugar! (Pon a Prueba tu Saber)</h2>
+            
+            <!-- Memorama -->
+            <div class="bg-red-50 p-6 rounded-xl shadow-lg border-2 border-red-300 mb-8">
+                <h3 class="text-2xl font-black text-red-700 mb-4">Juego 1: Memorama Tóxico</h3>
+                <p class="text-red-600 mb-4 font-semibold">Encuentra los pares de sustancia y su descripción. ¡No te dejes engañar por el humo!</p>
+                <div id="memorama-board" class="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-4 gap-3 justify-center max-w-xl mx-auto">
+                    <!-- Cards go here -->
+                </div>
+                <div id="memorama-message" class="mt-4 text-center font-black text-lg text-red-700"></div>
+            </div>
+
+            <!-- Relación de Columnas -->
+            <div class="bg-blue-50 p-6 rounded-xl shadow-lg border-2 border-blue-300 mb-8">
+                <h3 class="text-2xl font-black text-blue-700 mb-4">Juego 2: Relación de Columnas (Habilidades)</h3>
+                <p class="text-blue-600 mb-4 font-semibold">Relaciona el término clave de prevención con su definición correcta.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="column-game-container">
+                    <div id="terms-column"></div>
+                    <div id="definitions-column"></div>
+                </div>
+                <div id="column-message" class="mt-4 text-center font-black text-lg text-blue-700"></div>
+            </div>
+
+            <!-- Sopa de Letras -->
+            <div class="bg-green-50 p-6 rounded-xl shadow-lg border-2 border-green-300 mb-8">
+                <h3 class="text-2xl font-black text-green-700 mb-4">Juego 3: Sopa de Letras (Factores Protectores)</h3>
+                <p class="text-green-600 mb-4 font-semibold">Encuentra 7 palabras clave de la prevención en la cuadrícula.</p>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div id="word-search-grid-container" class="flex-grow">
+                        <div id="word-search-grid"></div>
+                    </div>
+                    <div id="word-list" class="p-4 bg-green-100 rounded-lg md:w-1/3">
+                        <h4 class="font-bold text-green-800 mb-2 text-xl">Palabras a Encontrar:</h4>
+                        <ul id="words-to-find" class="list-disc list-inside text-green-700"></ul>
+                        <div id="word-search-message" class="mt-4 font-black text-lg text-green-800"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer / Recursos CIJ (Simplificado para evitar repetición) -->
+    <footer class="bg-indigo-700 text-white p-6 md:p-8 mt-12 shadow-inner">
+        <div class="container mx-auto text-center">
+            <h3 class="text-2xl font-black mb-3 text-yellow-300">¿Necesitas Ayuda? ¡No Estás Solo/a!</h3>
+            <p class="mb-4 text-indigo-100">Si necesitas orientación profesional, contacta al CIJ.</p>
+            <div class="mt-4 bg-indigo-900 p-4 rounded-xl inline-block shadow-lg">
+                <p class="font-bold text-lg text-red-400">Línea de Atención Nacional (CECIADIC)</p>
+                <p class="text-white font-mono text-xl mt-1">01 800 911 2000</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- DATA DE LA APLICACIÓN (Variables definidas globalmente) ---
+        // Mitos y Realidades (Páginas 20-21)
+        const mitosRealidades = [
+            {
+                mito: "Unos pocos cigarros al día no hacen mal.",
+                realidad: "FALSO. Fumar tan solo 3 a 5 cigarros al día ya te pone en riesgo de sufrir problemas cardiovasculares.",
+                image: "https://images.unsplash.com/photo-1594951465223-b6d4949a2a7f?q=80&w=1280&fit=max" 
+            },
+            {
+                mito: "Estar expuesto(a) al humo no mata.",
+                realidad: "FALSO. 30 minutos de exposición pasiva son suficientes para aumentar el riesgo de infarto en personas sanas. El humo ambiental causa 600 mil muertes prematuras en el mundo.",
+                image: "https://images.unsplash.com/photo-1511512574047-832c3ef50f14?q=80&w=1280&fit=max"
+            },
+            {
+                mito: "Fumar un cigarro relaja y alivia el estrés.",
+                realidad: "FALSO. La nicotina es un <strong>estimulante</strong>. La sensación de 'alivio' es solo calmar la <strong>abstinencia</strong> que la misma adicción te causa.",
+                image: "https://images.unsplash.com/photo-1533228385265-d60232490d18?q=80&w=1280&fit=max"
+            },
+            {
+                mito: "Los cigarros 'light' no hacen daño.",
+                realidad: "FALSO. Contienen los mismos componentes cancerígenos que los convencionales. Tu cuerpo compensa inhalando más fuerte.",
+                image: "https://images.unsplash.com/photo-1621539281512-87002e1c313a?q=80&w=1280&fit=max"
+            },
+            {
+                mito: "El problema de fumar es solo mío.",
+                realidad: "FALSO. El humo libera miles de tóxicos. Quienes están a tu alrededor se vuelven <strong>fumadores pasivos</strong> y reciben las mismas sustancias dañinas.",
+                image: "https://images.unsplash.com/photo-1529156069894-432a933f7572?q=80&w=1280&fit=max"
+            },
+            {
+                mito: "Las áreas separadas solucionan el problema.",
+                realidad: "FALSO. Sin ventilación independiente, el aire se comparte y la contaminación se propaga. Fumar en un área separada sigue afectando a los no fumadores.",
+                image: "https://images.unsplash.com/photo-1585481717616-95331f24d7b2?q=80&w=1280&fit=max"
+            }
+        ];
+
+        // Factores de riesgo de Ámbito Familiar y Social (combinados)
+        const riskFactors = [
+            'Siento poca confianza en mi familia.', 'Siento poco apoyo de mi familia.', 'Siento que mi familia no me quiere.',
+            'Siento poca supervisión de mis actividades por parte de mi familia.', 'Me sobreprotegen.',
+            'Tengo problemas para comunicarme con mi familia.', 'Me maltratan física y verbalmente.',
+            'Siempre hay problemas y violencia en casa.', 'Fuman (familiares).', 
+            'Estoy estresado(a) por la separación o divorcio de mis padres.', 'Hay problemas económicos.',
+            'Perdí a un familiar querido.', 'Mis amigos y amigas fuman tabaco.',
+            'Existe poca promoción del deporte, actividades culturales y sociales donde vivo.',
+            'Hay pocos espacios para la recreación en mi comunidad.'
+        ];
+        
+        // Test de Ámbito Personal (NUEVO)
+        const personalFactors = [
+            'Me aburro fácilmente.', 'No hago deporte.', 'No sé lo que quiero hacer en un futuro.',
+            'Asisto a fiestas en donde muchas personas fuman.', 'Mi mejor amigo o amiga fuma.',
+            'Me siento inseguro(a) cuando experimento situaciones nuevas.', 'No me interesa seguir reglas y no me gusta que me pongan límites.',
+            'Me enojo cuando no me salen bien las cosas.', 'Se me complica decir no y poner límites.',
+            'No controlo mi enojo y soy agresivo(a).', 'Me pongo triste cuando no consigo lo que quiero.',
+            'No digo lo que pienso o cómo me siento por miedo a que me rechacen.', 'Pienso que las opiniones de los demás son más importantes que las mías.',
+            'No sé qué me puede pasar si fumo tabaco.', 'No como bien.', 'Me desvelo.', 
+            'Abandoné la escuela.', 'Tengo bajas calificaciones.',
+            'Siempre estoy preocupado(a) y no me puedo relajar.', 'Sufrí abuso sexual.',
+            'Estoy ansioso(a) la mayor parte del tiempo.', 'No puedo dormir bien.'
+        ];
+        
+        // Test de Asertividad (NUEVO - Actividad 5)
+        const asertividadQuestions = [
+            { id: 1, text: 'Trato de decir cosas que les gustan a las demás personas.', style: 'P' },
+            { id: 2, text: 'Evito contradecir la opinión de otra persona aunque no esté de acuerdo.', style: 'P' },
+            { id: 3, text: 'Me gusta que hagan lo que digo, aunque no estén de acuerdo las demás personas.', style: 'A' },
+            { id: 4, text: 'Expreso mis pensamientos y deseos de forma directa y clara.', style: 'S' },
+            { id: 5, text: 'Me gusta reírme de los errores o características personales de mis amistades.', style: 'A' },
+            { id: 6, text: 'Me da pena decir lo que siento o plantear mis dudas en presencia de alguien.', style: 'P' },
+            { id: 7, text: 'Le digo a las personas lo que me gusta de su forma de ser.', style: 'S' },
+            { id: 8, text: 'Me gusta hablar bien de mí, sin presumir.', style: 'S' },
+            { id: 9, text: 'Creo que debo hacer lo posible para agradarle a todo el mundo.', style: 'P' },
+            { id: 10, text: 'Me enoja mucho que me digan que fallé y contesto molesto(a).', style: 'A' },
+            { id: 11, text: 'Hago lo posible por tener el poder y control sobre los(as) demás.', style: 'A' },
+            { id: 12, text: 'Acepto y respeto los errores y limitaciones de quienes me rodean.', style: 'S' },
+        ];
+
+
+        // Data for interactive tóxicos list (Page 7)
+        const toxicosData = [
+            { name: 'Monóxido de Carbono', use: 'Humo de escape de coches', damage: 'Corazón, Arterias, Sangre (Te roba el oxígeno)' },
+            { name: 'Nicotina', use: 'Insecticidas', damage: 'Cerebro (Adicción), Corazón (Ritmo acelerado), Presión Arterial' },
+            { name: 'Alquitrán', use: 'Barniz o Pinturas', damage: 'Pulmones (Cáncer), Dientes, Encías, Papilas gustativas' },
+            { name: 'Arsénico', use: 'Veneno para hormigas', damage: 'Células y ADN (Cáncer)' },
+            { name: 'Plomo', use: 'Tinte de Cabello', damage: 'Corazón, Arterias, Crecimiento (en adolescentes)' },
+            { name: 'Amoniaco', use: 'Limpiador de Vidrios', damage: 'Aumenta absorción de nicotina, haciendo más adictivo el cigarro' },
+        ];
+        
+        // Data for Consecuencias (NUEVO)
+        const consecuenciasData = [
+            {
+                name: 'Psicológicas y de Comportamiento',
+                color: 'pink',
+                items: [
+                    'El tabaco NO relaja, solo calma la abstinencia.',
+                    'Provoca trastornos del sueño.',
+                    'Se asocia con la dependencia al alcohol.'
+                ]
+            },
+            {
+                name: 'Familiares, Escolares y Laborales',
+                color: 'yellow',
+                items: [
+                    'Mayor gasto económico (menos ahorro).',
+                    'Quemaduras de ropa.',
+                    'Familiares se vuelven fumadores pasivos.',
+                    'Conflictos de pareja y reclamos.',
+                    'Ausentismo escolar por salir a fumar.'
+                ]
+            },
+            {
+                name: 'Sociales',
+                color: 'blue',
+                items: [
+                    'Causa principal de muerte PREVENIBLE (gasto de 61 mil millones de pesos al gobierno).',
+                    'Provoca incendios por colillas mal apagadas.',
+                    'Colillas contaminan el ambiente (no son biodegradables).',
+                    'Accidentes de tránsito por distracción.'
+                ]
+            }
+        ];
+
+        // Señales de Alerta para el Semáforo (Página 51)
+        const semaforoSignals = [
+            'Estoy ansioso/a por fumar.', 'Me levanto y lo primero que hago es fumar un cigarro.',
+            'Me es difícil no fumar en lugares prohibidos.', 'Fumo a pesar de estar enfermo/a.',
+            'Disminuye mi rendimiento en la escuela.', 'Me reúno solo con personas que fuman.',
+            'Tengo cambios de personalidad y humor.', 'Tengo tos persistente.',
+            'Tengo mal olor en el cabello y ropa.', 'Tengo baja resistencia física.',
+            'Tengo dolores de cabeza.'
+        ];
+
+        // Preguntas para la Evaluación de Consumo (Página 21)
+        const consumoQuestions = [
+            {
+                id: 'q1',
+                text: '1. En promedio, ¿cuántos cigarros fumas al día?',
+                options: [
+                    { label: '0. 10 o menos', value: 0 },
+                    { label: '1. 11 a 20', value: 1 },
+                    { label: '2. 21 a 30', value: 2 },
+                    { label: '3. 31 o más', value: 3 },
+                ]
+            },
+            {
+                id: 'q2',
+                text: '2. ¿Cuánto tiempo pasa entre que te levantas y prendes tu primer cigarro?',
+                options: [
+                    { label: '0. Más de 60 minutos', value: 0 },
+                    { label: '1. De 31 a 60 minutos', value: 1 },
+                    { label: '2. De 6 a 30 minutos', value: 2 },
+                    { label: '3. En los primeros 5 minutos', value: 3 },
+                ]
+            },
+            {
+                id: 'q3',
+                text: '3. ¿Se te hace difícil no fumar en lugares donde no está permitido?',
+                options: [
+                    { label: '0. No', value: 0 },
+                    { label: '1. Sí', value: 1 },
+                ]
+            },
+            {
+                id: 'q4',
+                text: '4. ¿Qué cigarro te molestaría más dejar de fumar?',
+                options: [
+                    { label: '0. Todos los demás', value: 0 },
+                    { label: '1. El primero de la mañana', value: 1 },
+                ]
+            },
+            {
+                id: 'q5',
+                text: '5. ¿Fumas más durante las primeras horas de la mañana que durante el resto del día?',
+                options: [
+                    { label: '0. No', value: 0 },
+                    { label: '1. Sí', value: 1 },
+                ]
+            },
+            {
+                id: 'q6',
+                text: '6. ¿Fumas a pesar de estar tan enfermo(a) que tienes que permanecer en la cama la mayor parte del día?',
+                options: [
+                    { label: '0. No', value: 0 },
+                    { label: '1. Sí', value: 1 },
+                ]
+            },
+        ];
+
+
+        // --- Funciones Globales para Navegación ---
+        // Funcionalidad de Pestañas (Tabs)
+        function openTab(evt, tabName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.add("hidden");
+            }
+            tablinks = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.remove("hidden");
+            evt.currentTarget.classList.add("active");
+        }
+
+        // Funcionalidad de Mostrar/Ocultar Temas
+        function showSection(sectionId) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+        
+        // --- Funcionalidad de Acordeón (Toggle) ---
+        function toggleAccordion(contentId) {
+            const content = document.getElementById(contentId);
+            // CORRECCIÓN: Buscamos el ID de la flecha con el prefijo 'arrow-' más el ID completo del contenido.
+            const arrow = document.getElementById('arrow-' + contentId);
+            
+            if (content) {
+                content.classList.toggle('open');
+            }
+            // Solo intentamos modificar la clase si la flecha existe
+            if (arrow) {
+                 arrow.classList.toggle('open');
+            }
+        }
+
+        // --- Funcionalidad de Tarjeta Revelable (Genérica) ---
+        function toggleRevealCard(card) {
+            const info = card.querySelector('.reveal-info');
+            info.classList.toggle('open');
+        }
+
+
+        // --- RENDERIZADO DE CONTENIDO DINÁMICO ---
+        
+        // Renders the Asertividad Test (NUEVO)
+        function renderAsertividadTest() {
+            const container = document.getElementById('asertividad-questions-container');
+            if (!container) return; 
+            
+            container.innerHTML = asertividadQuestions.map(q => `
+                <div class="flex items-start justify-between bg-white p-3 rounded-lg shadow-sm border border-indigo-200">
+                    <p class="text-gray-700 font-medium">${q.id}. ${q.text}</p>
+                    <input type="checkbox" class="asertividad-checkbox form-checkbox text-indigo-600 rounded mt-1 ml-4 flex-shrink-0" data-style="${q.style}">
+                </div>
+            `).join('');
+        }
+
+        // Generates the Asertividad Test result
+        function checkAsertividadTest() {
+            const checkboxes = document.querySelectorAll('.asertividad-checkbox:checked');
+            const resultDiv = document.getElementById('asertividad-result');
+            
+            const scores = { 'P': 0, 'A': 0, 'S': 0 }; // Pasivo, Agresivo, Asertivo
+            checkboxes.forEach(cb => {
+                scores[cb.dataset.style]++;
+            });
+
+            // Determinar el estilo predominante
+            const maxScore = Math.max(scores.P, scores.A, scores.S);
+            const predominantStyles = Object.keys(scores).filter(style => scores[style] === maxScore);
+            const styleMap = { 'P': 'Pasivo/a', 'A': 'Agresivo/a', 'S': 'Asertivo/a' };
+
+            let message = '';
+            let style = '';
+            let emoji = '';
+            
+            resultDiv.classList.remove('hidden');
+
+            if (predominantStyles.includes('S') && maxScore >= 3) {
+                // Asertivo
+                emoji = '😎';
+                message = `<p class="font-black text-xl mb-2 text-indigo-800">¡Eres <strong>Asertivo/a</strong>! ${emoji}</p>
+                           <p>Tienes la mejor forma de comunicarte. Logras decir lo que piensas, sientes y quieres de forma **clara y respetuosa**, sin herir a nadie. ¡Difícilmente alguien podrá presionarte para fumar! Sigue así.</p>`;
+                style = 'bg-indigo-100 border-l-4 border-indigo-500';
+            } else if (predominantStyles.includes('P') && maxScore >= 3) {
+                // Pasivo
+                emoji = '😟';
+                message = `<p class="font-black text-xl mb-2 text-yellow-800">Tu estilo es <strong>Pasivo/a</strong> ${emoji}</p>
+                           <p>Marcaste ${scores.P} frases Pasivas. Esto indica que a menudo te da pena o miedo decir <strong>NO</strong>, y pones las opiniones de los demás antes que las tuyas. <strong>¡ALERTA!</strong> Esto te hace vulnerable a la presión. Debes practicar el **Disco Rayado** (Tema 1) para defender tu derecho a no fumar.</p>`;
+                style = 'bg-yellow-100 border-l-4 border-yellow-500';
+            } else if (predominantStyles.includes('A') && maxScore >= 3) {
+                // Agresivo
+                emoji = '😡';
+                message = `<p class="font-black text-xl mb-2 text-red-800">Tu estilo es <strong>Agresivo/a</strong> ${emoji}</p>
+                           <p>Marcaste ${scores.A} frases Agresivas. Tiendes a querer el control y puedes herir a los demás con tu forma de hablar. Si bien dices <strong>NO</strong>, puedes generar conflictos y alejar a la gente. Céntrate en la **Escucha Activa** y el **Control de Enojo** (Tema 2).</p>`;
+                style = 'bg-red-100 border-l-4 border-red-500';
+            } else {
+                 message = `<p class="font-black text-xl mb-2 text-gray-800">Resultado Mixto o Inicial</p>
+                           <p>Tu estilo de comunicación es variado. Sigue explorando las técnicas de Asertividad (decir lo que sientes con respeto) para que tu estilo <strong>Asertivo</strong> siempre gane.</p>`;
+                style = 'bg-gray-100 border-l-4 border-gray-500';
+            }
+            
+            resultDiv.className = `mt-4 p-4 rounded-lg ${style}`;
+            resultDiv.innerHTML = message;
+        }
+
+        // Renders the Mitos y Realidades interactive list
+        function renderMitosRealidades() {
+            const container = document.getElementById('mitos-realidades-list');
+            if (!container) return;
+            container.innerHTML = mitosRealidades.map((item, index) => `
+                <div class="reveal-card bg-white shadow-md border-2 border-red-400" onclick="toggleRevealCard(this)">
+                    <p class="font-black text-xl text-red-700 flex justify-between items-center">
+                        <span class="bg-red-200 px-2 py-1 rounded-full text-sm font-bold">MITO</span>
+                        ${item.mito}
+                    </p>
+                    <div class="reveal-info mt-3 border-t pt-2 border-red-200">
+                         <p class="text-sm font-semibold text-gray-800 flex items-start">
+                            <span class="bg-green-500 text-white text-xs px-2 py-1 rounded-full font-bold mr-2 mt-1 flex-shrink-0">REALIDAD</span>
+                            ${item.realidad}
+                        </p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Renders the combined risk factors list (Familiares y Sociales)
+        function renderRiskFactorsChecklist() {
+            const container = document.getElementById('risk-factors-checklist');
+            if (!container) return; 
+            container.innerHTML = riskFactors.map((factor, index) => `
+                <label class="flex items-center space-x-2 bg-gray-50 p-2 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                    <input type="checkbox" class="form-checkbox text-red-500 rounded focus:ring-red-500">
+                    <span class="text-gray-800">${factor}</span>
+                </label>
+            `).join('');
+        }
+        
+        // Renders the Test Personal (MIGRADO AL TEST TAB)
+        function renderPersonalTest() {
+            const container = document.getElementById('personal-test-checklist');
+            if (!container) return; 
+            container.innerHTML = personalFactors.map((factor, index) => `
+                <label class="flex items-center space-x-2 bg-gray-50 p-2 rounded-lg cursor-pointer hover:bg-indigo-50 transition">
+                    <input type="checkbox" class="personal-test-checkbox form-checkbox text-indigo-600 rounded focus:ring-indigo-600" data-factor-id="${index}">
+                    <span class="text-gray-800">${factor}</span>
+                </label>
+            `).join('');
+        }
+
+        // Renders the Semaforo Checklist (MIGRADO AL TEST TAB)
+        function renderSemaforoChecklist() {
+            const container = document.getElementById('semaforo-checklist');
+            if (!container) return; 
+            container.innerHTML = semaforoSignals.map((signal, index) => `
+                <label class="flex items-center space-x-2 bg-gray-50 p-2 rounded-lg cursor-pointer hover:bg-yellow-50 transition">
+                    <input type="checkbox" class="semaforo-checkbox form-checkbox text-green-500 rounded focus:ring-green-500" data-signal-id="${index}">
+                    <span class="text-gray-800">${signal}</span>
+                </label>
+            `).join('');
+        }
+
+        // Renders the Consumo Test (MIGRADO AL TEST TAB)
+        function renderConsumoTest() {
+            const container = document.getElementById('consumo-questions-container');
+            if (!container) return;
+            
+            container.innerHTML = consumoQuestions.map(q => `
+                <div class="consumo-question">
+                    <p class="font-bold mb-2 text-gray-700">${q.text}</p>
+                    ${q.options.map((option, index) => `
+                        <div class="consumo-option flex items-center">
+                            <input type="radio" name="${q.id}" value="${option.value}" id="${q.id}-${index}" class="text-green-600 focus:ring-green-500">
+                            <label for="${q.id}-${index}" class="ml-2 text-gray-600">${option.label}</label>
+                        </div>
+                    `).join('')}
+                </div>
+            `).join('');
+        }
+        
+        // Generates the Asertive response after checking the semaforo
+        function checkSemaforo() {
+            const checkboxes = document.querySelectorAll('.semaforo-checkbox:checked');
+            const resultDiv = document.getElementById('semaforo-result');
+            const checkedCount = checkboxes.length;
+            let message = '';
+            let style = '';
+
+            resultDiv.classList.remove('hidden');
+
+            if (checkedCount === 0) {
+                // VERDE (Bajo Riesgo)
+                message = `<p class="font-black text-xl mb-2">¡SEGURO, LUZ VERDE! 🟢</p>
+                           <p>¡Qué bien! No detectas ninguna señal de alerta. Esto es porque tienes el control. Sigue reforzando tu autoestima y tus habilidades para decir <strong>NO</strong>. Tu salud es tu prioridad, ¡no la sueltes!</p>`;
+                style = 'bg-green-100 border-l-4 border-green-500 text-green-800';
+            } else if (checkedCount >= 1 && checkedCount <= 3) {
+                // AMARILLO (Riesgo Moderado / Alerta)
+                message = `<p class="font-black text-xl mb-2">¡ALERTA, LUZ AMARILLA! 🟡</p>
+                           <p>Hey, has marcado ${checkedCount} señal(es). Esto es una señal para hacer un <strong>TIEMPO FUERA</strong>. Usa tu habilidad de <strong>Respiración 4x4</strong> y haz tu <strong>Balance Decisional</strong>. Recuerda: es normal tener dudas, pero pide ayuda para evitar que estas señales se vuelvan un hábito.</p>`;
+                style = 'bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800';
+            } else {
+                // ROJO (Riesgo Alto / Necesita Ayuda Urgente)
+                message = `<p class="font-black text-xl mb-2">¡PELIGRO, LUZ ROJA! 🔴</p>
+                           <p>El semáforo te pide que <strong>DETENGAS</strong> tu consumo y busques apoyo ya. Has marcado ${checkedCount} señales, y esto indica que la nicotina puede estar tomando el control. Usa tu <strong>Asertividad</strong> para pedir ayuda. Llama a los expertos del CIJ inmediatamente. <strong>No estás solo/a</strong>.</p>`;
+                style = 'bg-red-100 border-l-4 border-red-500 text-red-800';
+            }
+
+            resultDiv.className = `mt-4 p-4 rounded-lg ${style}`;
+            resultDiv.innerHTML = message;
+        }
+        
+        // Generates the Asertive response for the Personal Test (MIGRADO AL TEST TAB)
+        function checkPersonalTest() {
+            const checkboxes = document.querySelectorAll('.personal-test-checkbox:checked');
+            const resultDiv = document.getElementById('personal-test-result');
+            const checkedCount = checkboxes.length;
+            const totalFactors = personalFactors.length;
+            const score = checkedCount;
+            let message = '';
+            let style = '';
+
+            resultDiv.classList.remove('hidden');
+
+            if (score <= 5) {
+                // Verde / Alta Protección
+                message = `<p class="font-black text-xl mb-2 text-green-800">¡SÚPER BIEN! TU POTENCIAL ESTÁ AL MÁXIMO 🚀</p>
+                           <p>¡Tienes una base muy fuerte! Solo marcaste ${score} factor(es). Esto significa que la mayor parte del tiempo: <strong>tú decides</strong>, te sientes seguro/a y sabes cómo manejar tus emociones. Sigue usando tu <strong>Autoestima</strong> como escudo para rechazar cualquier presión. ¡Vas por un futuro imparable!</p>`;
+                style = 'bg-green-100 border-l-4 border-green-500';
+            } else if (score > 5 && score <= 12) {
+                // Amarillo / Alerta Personal
+                message = `<p class="font-black text-xl mb-2 text-yellow-800">¡ALERTA PERSONAL! NECESITAS AJUSTES 🛠️</p>
+                           <p>Marcaste ${score} factores, y esto te pone en un punto de <strong>vulnerabilidad</strong>. Cuidado con el <strong>aburrimiento</strong>, las <strong>dudas</strong> y el dejar que otros decidan por ti. Enfócate en tu <strong>Control Remoto Mental</strong> (Tema 2) y en tu <strong>Balance Decisional</strong> (Tema 3). Recuerda, tú vales mucho más que la opinión de los demás.</p>`;
+                style = 'bg-yellow-100 border-l-4 border-yellow-500';
+            } else {
+                // Rojo / Necesitas Reforzar Habilidades
+                message = `<p class="font-black text-xl mb-2 text-red-800">¡ZONA DE RIESGO! REFUERZA TUS HABILIDADES YA 💪</p>
+                           <p>Con ${score} factores marcados, tus emociones y situaciones personales te están haciendo muy vulnerable al consumo. Tu tarea principal es trabajar tu <strong>Asertividad</strong> y buscar ayuda para lo que te está generando <strong>ansiedad</strong> o <strong>tristeza</strong>. No tienes que cargar esto solo/a. Usa el teléfono de apoyo del CIJ. ¡Toma el control de tu vida!</p>`;
+                style = 'bg-red-100 border-l-4 border-red-500';
+            }
+
+            resultDiv.className = `mt-4 p-4 rounded-lg ${style}`;
+            resultDiv.innerHTML = message;
+        }
+
+        // Generates the Consumo Test Score and Interpretation (MIGRADO AL TEST TAB)
+        function checkConsumoTest() {
+            const form = document.getElementById('consumo-questions-container');
+            const resultDiv = document.getElementById('consumo-result');
+            let totalScore = 0;
+            let allAnswered = true;
+
+            consumoQuestions.forEach(q => {
+                const selectedOption = form.querySelector(`input[name="${q.id}"]:checked`);
+                if (selectedOption) {
+                    totalScore += parseInt(selectedOption.value);
+                } else {
+                    allAnswered = false;
+                }
+            });
+
+            resultDiv.classList.remove('hidden');
+
+            if (!allAnswered) {
+                resultDiv.className = 'mt-4 p-4 rounded-lg bg-red-100 border-l-4 border-red-500 text-red-800';
+                resultDiv.innerHTML = '<p class="font-black text-xl mb-2">¡Alto ahí! 🛑</p><p>Debes responder <strong>TODAS</strong> las preguntas para evaluar tu nivel de riesgo.</p>';
+                return;
+            }
+
+            let message = '';
+            let style = '';
+            let riesgo = '';
+
+            if (totalScore === 0) {
+                riesgo = 'Ninguno';
+                message = `<p class="font-black text-xl mb-2 text-green-800">Nivel de Riesgo: ${riesgo} (0 puntos)</p>
+                           <p>¡Fantástico! No presentas un nivel de riesgo. Sigue así, recuerda que cualquier consumo daña el organismo. ¡Mantente libre de humo!</p>`;
+                style = 'bg-green-100 border-l-4 border-green-500';
+            } else if (totalScore >= 1 && totalScore <= 3) {
+                riesgo = 'Inicial';
+                message = `<p class="font-black text-xl mb-2 text-yellow-800">Nivel de Riesgo: ${riesgo} (${totalScore} puntos) ⚠️</p>
+                           <p>Tu organismo apenas se está adaptando al tabaco. Con la información adecuada y un plan, puedes dejar de fumar antes de que se vuelva una dependencia fuerte. ¡Busca ayuda si lo necesitas!</p>`;
+                style = 'bg-yellow-100 border-l-4 border-yellow-500';
+            } else if (totalScore >= 4 && totalScore <= 6) {
+                riesgo = 'Medio';
+                message = `<p class="font-black text-xl mb-2 text-orange-700">Nivel de Riesgo: ${riesgo} (${totalScore} puntos) 🚨</p>
+                           <p>¡Atención! Ya puedes experimentar una necesidad física por el tabaco. Para dejar de fumar, es indispensable que busques ayuda especializada, médica y psicológica. Tienes el poder de cambiar esto.</p>`;
+                style = 'bg-orange-100 border-l-4 border-orange-500';
+            } else { // 7 o más
+                riesgo = 'Severo';
+                message = `<p class="font-black text-xl mb-2 text-red-800">Nivel de Riesgo: ${riesgo} (${totalScore} puntos) ❌</p>
+                           <p>La necesidad física por el tabaco es ALTA. Puede ser una parte importante de tu vida para aliviar la ansiedad. Es URGENTE que busques ayuda profesional. Llama ahora al CIJ. <strong>Tu salud es lo primero.</strong></p>`;
+                style = 'bg-red-100 border-l-4 border-red-500';
+            }
+
+            resultDiv.className = `mt-4 p-4 rounded-lg ${style}`;
+            resultDiv.innerHTML = message;
+        }
+
+
+        
+        // Renders the interactive tóxicos list
+        function renderToxicosList() {
+            const container = document.getElementById('toxicos-list');
+            if (!container) return;
+            container.innerHTML = toxicosData.map((toxico, index) => `
+                <div class="reveal-card toxico-card" onclick="toggleRevealCard(this)">
+                    <p class="font-bold text-lg text-red-800 flex justify-between items-center">
+                        ${toxico.name}
+                        <span class="text-xs text-red-500 font-medium">USO COMÚN: ${toxico.use}</span>
+                    </p>
+                    <div class="reveal-info">
+                        <p class="text-sm mt-1"><strong>¡OJO! Daño a tus órganos:</strong> <span class="text-red-600">${toxico.damage}</span></p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Renders the interactive consecuencias list (NUEVO)
+        function renderConsecuenciasList() {
+            const container = document.getElementById('consecuencias-list');
+            if (!container) return;
+            container.innerHTML = consecuenciasData.map((consec, index) => `
+                <div class="reveal-card consecuencia-card-${consec.color}" onclick="toggleRevealCard(this)">
+                    <p class="font-bold text-lg text-gray-800">${consec.name}</p>
+                    <div class="reveal-info">
+                        <ul class="list-disc list-inside text-gray-700 ml-4 space-y-1 mt-2">
+                            ${consec.items.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Renders CIJ Info Block with Map (CIJ Location: Calle Morelos Sur 730, Delegación San Sebastián, 50150 Toluca de Lerdo, Méx.)
+        function renderCIJBlocks() {
+            // FIX: Using the user-provided URL for the map embed.
+            const cijHtml = `
+                <div class="bg-indigo-700 text-white p-6 rounded-lg text-center mt-6">
+                    <h3 class="text-2xl font-black mb-3 text-yellow-500">¿Necesitas Ayuda o Más Info?</h3>
+                    <p class="mb-4 text-indigo-100">Si sientes que necesitas hablar con alguien o tienes dudas, contacta a los expertos de los <strong>Centros de Integración Juvenil (CIJ)</strong>.</p>
+                    
+                    <!-- Google Maps Iframe (UPDATED URL) -->
+                    <div class="w-full h-48 bg-gray-200 rounded-lg overflow-hidden mb-4">
+                        <iframe 
+                            width="100%" 
+                            height="100%" 
+                            frameborder="0" 
+                            style="border:0;" 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3765.626857646725!2d-99.64567352406016!3d19.29858654494562!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cd89eb33eeccd9%3A0xd8307b5c7752f111!2sCIJ%20centro%20de%20integraci%C3%B3n%20juvenil!5e0!3m2!1ses!2smx!4v1763496430928!5m2!1ses!2smx"
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+
+                    <div class="mt-4 bg-indigo-900 p-4 rounded-xl inline-block shadow-lg w-full max-w-sm">
+                        <p class="font-bold text-lg text-red-400">CIJ - Centro de Atención Ciudadana</p>
+                        <p class="mb-1 text-base">Dirección (Edo. Mex.): <span class="text-white font-medium">Calle Morelos Sur 730, Delegación San Sebastián, 50150 Toluca de Lerdo, Méx.</span></p>
+                        <p class="mb-1 text-base">Teléfono de Apoyo: <span class="text-white font-mono text-xl">+52 722 213 0378</span></p>
+                        <p class="text-sm mt-2 text-gray-400">Línea de atención nacional: 01 800 911 2000 (CECIADIC)</p>
+                    </div>
+                </div>
+            `;
+            
+            // Reemplazar el contenido de los bloques CIJ en cada Tema y en la pestaña Test
+            const block1 = document.getElementById('cij-block-1');
+            const block2 = document.getElementById('cij-block-2');
+            const block3 = document.getElementById('cij-block-3');
+            const blockTest = document.getElementById('cij-block-test');
+            
+            if(block1) block1.innerHTML = cijHtml;
+            if(block2) block2.innerHTML = cijHtml;
+            if(block3) block3.innerHTML = cijHtml;
+            if(blockTest) blockTest.innerHTML = cijHtml;
+        }
+        
+        // --- Exportación a PDF (NUEVO) ---
+        function exportToPDF() {
+            const element = document.getElementById('content-sections');
+            
+            // Clonar el elemento principal para limpiar la vista antes de la exportación
+            const printableElement = element.cloneNode(true);
+            printableElement.id = 'printable-content';
+            
+            // Quitar elementos no esenciales (imágenes de fondo, botones de acordeón)
+            printableElement.querySelectorAll('.accordion-button').forEach(button => {
+                button.remove();
+            });
+            printableElement.querySelectorAll('.accordion-content').forEach(content => {
+                // Forzar la apertura de todo el contenido para que se vea en el PDF
+                content.classList.add('open');
+                content.style.maxHeight = 'none';
+                content.style.padding = '1rem';
+            });
+            
+            // El tema de inicio se quita
+            printableElement.querySelector('#tema-inicio').remove();
+            
+            // Mostrar todos los temas
+            printableElement.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('hidden');
+            });
+            
+            // Preparar el documento para html2pdf
+            const pdfOptions = {
+                margin: 10,
+                filename: 'Guia_Prevencion_Tabaco_Adolescentes.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, logging: false, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // Crear un contenedor temporal para el clon
+            const tempContainer = document.createElement('div');
+            tempContainer.style.position = 'absolute';
+            tempContainer.style.left = '-9999px';
+            tempContainer.appendChild(printableElement);
+            document.body.appendChild(tempContainer);
+            
+            // Generar el PDF
+            html2pdf().from(printableElement).set(pdfOptions).save().then(() => {
+                // Limpiar el contenedor temporal después de la exportación
+                document.body.removeChild(tempContainer);
+            });
+        }
+
+
+        // --- JUEGO 1: MEMORAMA (Código omitido por brevedad, se asume su funcionalidad) ---
+        const memoramaPairs = [
+            { id: 1, text: 'Nicotina', match: 'Sustancia que genera adicción.' },
+            { id: 2, text: 'Alquitrán', match: 'Residuo pegajoso y cancerígeno.' },
+            { id: 3, text: 'Monóxido de Carbono', match: 'Gas que roba el oxígeno a la sangre.' },
+            { id: 4, text: 'Humo de 3ª Mano', match: 'Queda pegado en ropa y objetos.' },
+        ];
+        
+        let firstCard = null;
+        let lockBoard = false;
+        let matchesFound = 0;
+        
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function initMemorama() {
+            const board = document.getElementById('memorama-board');
+            const message = document.getElementById('memorama-message');
+            board.innerHTML = '';
+            message.textContent = '';
+            
+            const cardsData = memoramaPairs.flatMap(pair => [
+                { type: 'term', content: pair.text, pairId: pair.id },
+                { type: 'match', content: pair.match, pairId: pair.id }
+            ]);
+            
+            shuffleArray(cardsData);
+            
+            cardsData.forEach(data => {
+                const card = document.createElement('div');
+                card.classList.add('memorama-card');
+                card.dataset.pairId = data.pairId;
+                card.dataset.type = data.type;
+                card.innerHTML = `
+                    <div class="memorama-inner">
+                        <div class="memorama-front">TÓXICO</div>
+                        <div class="memorama-back">${data.content}</div>
+                    </div>
+                `;
+                card.addEventListener('click', () => flipCard(card));
+                board.appendChild(card);
+            });
+
+            matchesFound = 0;
+            firstCard = null;
+            lockBoard = false;
+        }
+
+        function flipCard(card) {
+            if (lockBoard || card === firstCard || card.classList.contains('matched')) return;
+
+            card.classList.add('flipped');
+
+            if (!firstCard) {
+                firstCard = card;
+                return;
+            }
+
+            // Second card flip
+            lockBoard = true;
+            checkMatch(card);
+        }
+
+        function checkMatch(secondCard) {
+            const isMatch = firstCard.dataset.pairId === secondCard.dataset.pairId;
+            isMatch ? disableCards(secondCard) : unflipCards(secondCard);
+        }
+
+        function disableCards(secondCard) {
+            firstCard.classList.add('matched');
+            secondCard.classList.add('matched');
+            resetBoard();
+            matchesFound++;
+            if (matchesFound === memoramaPairs.length) {
+                document.getElementById('memorama-message').textContent = '¡Felicidades, completaste el Memorama Tóxico!';
+            }
+        }
+
+        function unflipCards(secondCard) {
+            setTimeout(() => {
+                firstCard.classList.remove('flipped');
+                secondCard.classList.remove('flipped');
+                resetBoard();
+            }, 1000);
+        }
+
+        function resetBoard() {
+            [firstCard, lockBoard] = [null, false];
+        }
+
+        // --- JUEGO 2: RELACIÓN DE COLUMNAS (Código omitido por brevedad, se asume su funcionalidad) ---
+        const columnPairs = [
+            { term: 'Asertividad', definition: 'Expresar ideas de forma clara y respetuosa.' },
+            { term: 'Balance Decisional', definition: 'Analizar ventajas y desventajas antes de actuar.' },
+            { term: 'Disco Rayado', definition: 'Repetir argumentos de rechazo con firmeza.' },
+            { term: 'Respiración 4x4', definition: 'Técnica para manejar el estrés y la ansiedad.' }
+        ];
+
+        let selectedTerm = null;
+        let matchedCount = 0;
+
+        function shuffleAndRenderColumns() {
+            const terms = columnPairs.map(p => ({ text: p.term, id: p.term }));
+            const definitions = columnPairs.map(p => ({ text: p.definition, id: columnPairs.find(cp => cp.definition === p.definition).term }));
+
+            shuffleArray(terms);
+            shuffleArray(definitions);
+
+            const termsColumn = document.getElementById('terms-column');
+            const definitionsColumn = document.getElementById('definitions-column');
+            termsColumn.innerHTML = '';
+            definitionsColumn.innerHTML = '';
+            document.getElementById('column-message').textContent = '';
+            matchedCount = 0;
+            selectedTerm = null;
+
+            terms.forEach(item => {
+                const div = document.createElement('div');
+                div.classList.add('column-item', 'term');
+                div.textContent = item.text;
+                div.dataset.matchId = item.id;
+                div.addEventListener('click', () => handleTermClick(div));
+                termsColumn.appendChild(div);
+            });
+
+            definitions.forEach(item => {
+                const div = document.createElement('div');
+                div.classList.add('column-item', 'definition');
+                div.textContent = item.text;
+                div.dataset.matchId = item.id;
+                div.addEventListener('click', () => handleDefinitionClick(div));
+                definitionsColumn.appendChild(div);
+            });
+        }
+
+        function handleTermClick(termElement) {
+            if (termElement.classList.contains('matched-item')) return;
+
+            document.querySelectorAll('.term').forEach(el => el.classList.remove('selected-term'));
+            
+            if (selectedTerm === termElement) {
+                selectedTerm.classList.remove('selected-term');
+                selectedTerm = null;
+            } else {
+                termElement.classList.add('selected-term');
+                selectedTerm = termElement;
+            }
+        }
+
+        function handleDefinitionClick(defElement) {
+            if (!selectedTerm || defElement.classList.contains('matched-item')) return;
+
+            if (selectedTerm.dataset.matchId === defElement.dataset.matchId) {
+                // Match!
+                selectedTerm.classList.remove('selected-term');
+                selectedTerm.classList.add('matched-item');
+                defElement.classList.add('matched-item');
+                selectedTerm = null;
+                matchedCount++;
+
+                if (matchedCount === columnPairs.length) {
+                    document.getElementById('column-message').textContent = '¡Excelente! Todas las habilidades relacionadas correctamente.';
+                }
+            } else {
+                // Mismatch feedback
+                defElement.style.backgroundColor = '#fca5a5';
+                defElement.style.color = '#7f1d1d';
+                setTimeout(() => {
+                    defElement.style.backgroundColor = ''; // Reset color
+                    defElement.style.color = '';
+                    selectedTerm.classList.remove('selected-term');
+                    selectedTerm = null;
+                }, 500);
+            }
+        }
+
+        // --- JUEGO 3: SOPA DE LETRAS (Código omitido por brevedad, se asume su funcionalidad) ---
+        const wordsToFind = ['ASERTIVIDAD', 'BALANCE', 'NICOTINA', 'PULMONES', 'ESTRES', 'SALUD', 'NO'];
+        const gridSize = 10;
+        let grid = Array(gridSize).fill(0).map(() => Array(gridSize).fill(''));
+        let foundWords = [];
+        let startCell = null;
+        let endCell = null;
+
+        function createGrid() {
+            grid = Array(gridSize).fill(0).map(() => Array(gridSize).fill(''));
+            foundWords = [];
+            const wordListEl = document.getElementById('words-to-find');
+            wordListEl.innerHTML = '';
+            wordsToFind.forEach(word => {
+                const li = document.createElement('li');
+                li.id = `word-${word}`;
+                li.textContent = word;
+                wordListEl.appendChild(li);
+                placeWordInGrid(word);
+            });
+
+            fillEmptyCells();
+            renderGrid();
+        }
+
+        function placeWordInGrid(word) {
+            const maxAttempts = 50;
+            const directions = [
+                { dr: 0, dc: 1 }, { dr: 1, dc: 0 }, { dr: 1, dc: 1 }, { dr: 1, dc: -1 },
+                { dr: 0, dc: -1 }, { dr: -1, dc: 0 }, { dr: -1, dc: -1 }, { dr: -1, dc: 1 }
+            ];
+
+            for (let attempt = 0; attempt < maxAttempts; attempt++) {
+                const direction = directions[Math.floor(Math.random() * directions.length)];
+                const r = Math.floor(Math.random() * gridSize);
+                const c = Math.floor(Math.random() * gridSize);
+
+                if (canPlaceWord(word, r, c, direction)) {
+                    for (let i = 0; i < word.length; i++) {
+                        grid[r + i * direction.dr][c + i * direction.dc] = { char: word[i], word: word };
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function canPlaceWord(word, r, c, direction) {
+            for (let i = 0; i < word.length; i++) {
+                const newR = r + i * direction.dr;
+                const newC = c + i * direction.dc;
+
+                if (newR < 0 || newR >= gridSize || newC < 0 || newC >= gridSize) return false;
+                if (grid[newR][newC] !== '' && grid[newR][newC].char !== word[i]) return false;
+            }
+            return true;
+        }
+
+        function fillEmptyCells() {
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            for (let r = 0; r < gridSize; r++) {
+                for (let c = 0; c < gridSize; c++) {
+                    if (grid[r][c] === '') {
+                        grid[r][c] = { char: alphabet[Math.floor(Math.random() * alphabet.length)], word: null };
+                    }
+                }
+            }
+        }
+
+        function renderGrid() {
+            const gridEl = document.getElementById('word-search-grid');
+            gridEl.innerHTML = '';
+            for (let r = 0; r < gridSize; r++) {
+                for (let c = 0; c < gridSize; c++) {
+                    const cell = document.createElement('div');
+                    cell.classList.add('grid-cell');
+                    cell.id = `cell-${r}-${c}`;
+                    cell.dataset.r = r;
+                    cell.dataset.c = c;
+                    cell.innerHTML = `<div class="grid-cell-content">${grid[r][c].char}</div>`;
+                    cell.addEventListener('mousedown', handleCellStart);
+                    cell.addEventListener('touchstart', handleCellStart); // Touch support
+                    cell.addEventListener('mouseenter', handleCellHover);
+                    cell.addEventListener('touchmove', handleTouchMove); // Touch support
+                    cell.addEventListener('mouseup', handleCellEnd);
+                    cell.addEventListener('touchend', handleCellEnd); // Touch support
+                    gridEl.appendChild(cell);
+                }
+            }
+        }
+        
+        function getCellElement(r, c) {
+            return document.getElementById(`cell-${r}-${c}`);
+        }
+        
+        function getCellFromCoords(x, y) {
+            const gridEl = document.getElementById('word-search-grid');
+            const rect = gridEl.getBoundingClientRect();
+            if (x < rect.left || x > rect.right || y < rect.top || y > rect.bottom) {
+                return null;
+            }
+            
+            const colWidth = rect.width / gridSize;
+            const rowHeight = rect.height / gridSize;
+            
+            const c = Math.floor((x - rect.left) / colWidth);
+            const r = Math.floor((y - rect.top) / rowHeight);
+            
+            return getCellElement(r, c);
+        }
+
+        function handleTouchMove(e) {
+            if (!startCell) return;
+            e.preventDefault(); // Prevent scrolling
+            const touch = e.touches[0];
+            const currentCell = getCellFromCoords(touch.clientX, touch.clientY);
+            if (currentCell && currentCell !== endCell) {
+                // Mimic mouseenter for continuous selection highlighting
+                const startR = parseInt(startCell.dataset.r);
+                const startC = parseInt(startCell.c);
+                const endR = parseInt(currentCell.dataset.r);
+                const endC = parseInt(currentCell.dataset.c);
+
+                document.querySelectorAll('.grid-cell:not(.found)').forEach(cell => cell.classList.remove('selected'));
+                startCell.classList.add('selected');
+
+                const cellsToHighlight = getCellsInLine(startR, startC, endR, endC);
+                cellsToHighlight.forEach(cell => {
+                    const el = getCellElement(cell.r, cell.c);
+                    if (el && !el.classList.contains('found')) {
+                        el.classList.add('selected');
+                    }
+                });
+                endCell = currentCell; 
+            }
+        }
+
+
+        function handleCellStart(e) {
+            e.preventDefault();
+            if (e.type === 'mousedown' && e.button !== 0) return; // Only left click for mouse
+
+            startCell = this;
+            startCell.classList.add('selected');
+
+            if (e.type === 'mousedown') {
+                document.getElementById('word-search-grid').addEventListener('mouseleave', handleGridLeave);
+            }
+        }
+
+        function handleCellHover() {
+            if (!startCell) return;
+            // Highlight cells between startCell and current cell
+            const startR = parseInt(startCell.dataset.r);
+            const startC = parseInt(startCell.dataset.c);
+            const endR = parseInt(this.dataset.r);
+            const endC = parseInt(this.dataset.c);
+
+            // Clear previous hover selection
+            document.querySelectorAll('.grid-cell:not(.found)').forEach(cell => cell.classList.remove('selected'));
+            startCell.classList.add('selected');
+
+            // Find all cells along the line
+            const cellsToHighlight = getCellsInLine(startR, startC, endR, endC);
+            cellsToHighlight.forEach(cell => {
+                const el = getCellElement(cell.r, cell.c);
+                if (el && !el.classList.contains('found')) {
+                    el.classList.add('selected');
+                }
+            });
+        }
+        
+        function handleGridLeave() {
+            if (startCell) {
+                document.querySelectorAll('.grid-cell:not(.found)').forEach(cell => cell.classList.remove('selected'));
+                startCell = null;
+            }
+        }
+
+        function handleCellEnd(e) {
+            e.preventDefault();
+            if (!startCell) return;
+            
+            // Determine endCell for touch events
+            if (e.type === 'touchend') {
+                const touch = e.changedTouches[0];
+                endCell = getCellFromCoords(touch.clientX, touch.clientY);
+                if (!endCell) { // If touch ended outside grid
+                     handleGridLeave();
+                     return;
+                }
+            } else { // mouseup
+                endCell = this;
+            }
+
+
+            const startR = parseInt(startCell.dataset.r);
+            const startC = parseInt(startCell.dataset.c);
+            const endR = parseInt(endCell.dataset.r);
+            const endC = parseInt(endCell.dataset.c);
+
+            // Check if it's a valid straight line selection
+            if (startR === endR || startC === endC || Math.abs(startR - endR) === Math.abs(startC - endC)) {
+                checkWord(startR, startC, endR, endC);
+            }
+
+            // Clear selection state
+            document.querySelectorAll('.grid-cell:not(.found)').forEach(cell => cell.classList.remove('selected'));
+            startCell = null;
+            endCell = null;
+            document.getElementById('word-search-grid').removeEventListener('mouseleave', handleGridLeave);
+        }
+        
+        function getCellsInLine(r1, c1, r2, c2) {
+            const cells = [];
+            const dr = Math.sign(r2 - r1);
+            const dc = Math.sign(c2 - c1);
+            
+            let r = r1;
+            let c = c1;
+
+            if (r1 === r2 && c1 === c2) { // Handle single cell selection
+                cells.push({ r: r1, c: c1 });
+                return cells;
+            }
+
+            while (true) {
+                cells.push({ r: r, c: c });
+                if (r === r2 && c === c2) break;
+                
+                // Safety break for unexpected paths, though straight lines should resolve quickly
+                if (cells.length > gridSize * 2) break; 
+
+                // Advance R and C, handling non-straight lines more gracefully if needed, 
+                // but for this game, we only check straight lines
+                if (r !== r2) r += dr;
+                if (c !== c2) c += dc;
+
+                if (r === r2 && c === c2) { // Add the final cell if both reached target simultaneously (diagonal)
+                    cells.push({ r: r, c: c });
+                    break;
+                }
+            }
+            
+            // This is a common issue with grid line drawing; ensure the last cell is included if missed.
+            if (!cells.some(cell => cell.r === r2 && cell.c === c2)) {
+                 cells.push({ r: r2, c: c2 });
+            }
+
+
+            // Remove duplicates
+            const uniqueCells = [];
+            const cellMap = new Set();
+            for (const cell of cells) {
+                const key = `${cell.r}-${cell.c}`;
+                if (!cellMap.has(key)) {
+                    cellMap.add(key);
+                    uniqueCells.push(cell);
+                }
+            }
+            
+            return uniqueCells;
+        }
+
+        function checkWord(r1, c1, r2, c2) {
+            const cells = getCellsInLine(r1, c1, r2, c2);
+            let selectedWord = '';
+            
+            // Check if all cells form a valid word in the grid data
+            let cellDataSequence = cells.map(cell => grid[cell.r][cell.c]);
+            
+            // Extract forward word
+            selectedWord = cellDataSequence.map(data => data.char).join('');
+            
+            // Try matching the selected word against target words (forward and reversed)
+            let found = false;
+            let finalTargetWord = null;
+
+            for (const targetWord of wordsToFind) {
+                const reversedWord = targetWord.split('').reverse().join('');
+                
+                if (selectedWord === targetWord || selectedWord === reversedWord) {
+                    // Confirm that the selected cell sequence corresponds to a single placed word
+                    const placedWordInSequence = cellDataSequence.every(data => data.word === targetWord || data.word === null);
+                    if (placedWordInSequence) {
+                         found = true;
+                         finalTargetWord = targetWord;
+                         break;
+                    }
+                }
+            }
+            
+            if (found && !foundWords.includes(finalTargetWord)) {
+                foundWords.push(finalTargetWord);
+                cells.forEach(cell => {
+                    getCellElement(cell.r, cell.c).classList.add('found');
+                });
+                document.getElementById(`word-${finalTargetWord}`).style.textDecoration = 'line-through';
+                
+                if (foundWords.length === wordsToFind.length) {
+                    document.getElementById('word-search-message').textContent = '¡Felicidades! Encontraste todas las palabras clave.';
+                }
+            }
+        }
+        
+        // Inicialización de la página y los juegos
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMitosRealidades(); // NUEVO: Mitos y Realidades
+            renderRiskFactorsChecklist();
+            renderToxicosList();
+            renderConsecuenciasList(); 
+            renderSemaforoChecklist(); 
+            renderPersonalTest(); 
+            renderConsumoTest(); 
+            renderAsertividadTest(); // NUEVO: Test de Asertividad
+            renderCIJBlocks(); 
+            initMemorama();
+            shuffleAndRenderColumns();
+            createGrid();
+            
+            // Abre la pestaña de Temas por defecto, y el inicio de los temas.
+            const initialTabButton = document.querySelector('.tab-button');
+            initialTabButton.classList.add('active');
+            document.getElementById('Temas').classList.remove('hidden');
+            showSection('tema-inicio'); 
+        });
+    </script>
+</body>
+</html>
