@@ -248,7 +248,7 @@
         
         /* --- MARCA DE AGUA (WATERMARK) --- */
         .watermark::before {
-            content: "alberto.angeles.g@gmail.com";
+            content: "alberto.angeles.g@gmail.com | 7226540066"; /* TELÉFONO DE MARCA DE AGUA AGREGADO */
             position: fixed;
             top: 50%;
             left: 50%;
@@ -822,8 +822,8 @@
             <h3 class="text-2xl font-black mb-3 text-yellow-300">¿Necesitas Ayuda? ¡No Estás Solo/a!</h3>
             <p class="mb-4 text-indigo-100">Si necesitas orientación profesional, contacta al CIJ.</p>
             <div class="mt-4 bg-indigo-900 p-4 rounded-xl inline-block shadow-lg">
-                <p class="font-bold text-lg text-red-400">Línea de Atención Nacional (CECIADIC)</p>
-                <p class="text-white font-mono text-xl mt-1">01 800 911 2000</p>
+                <p class="font-bold text-lg text-red-400">CIJ NACIONAL</p>
+                <p class="text-white font-mono text-xl mt-1">55 5212 1212</p>
             </div>
         </div>
     </footer>
@@ -1370,6 +1370,7 @@
 
         // Renders CIJ Info Block with Map
         function renderCIJBlocks() {
+            // TELÉFONO DE SOPORTE ACTUALIZADO A CIJ NACIONAL
             const cijHtml = `
                 <div class="bg-indigo-700 text-white p-6 rounded-lg text-center mt-6">
                     <h3 class="text-2xl font-black mb-3 text-yellow-500">¿Necesitas Ayuda o Más Info?</h3>
@@ -1392,8 +1393,8 @@
                     <div class="mt-4 bg-indigo-900 p-4 rounded-xl inline-block shadow-lg w-full max-w-sm">
                         <p class="font-bold text-lg text-red-400">CIJ - Centro de Atención Ciudadana</p>
                         <p class="mb-1 text-base">Dirección (Edo. Mex.): <span class="text-white font-medium">Calle Morelos Sur 730, Delegación San Sebastián, 50150 Toluca de Lerdo, Méx.</span></p>
-                        <p class="mb-1 text-base">Teléfono de Apoyo: <span class="text-white font-mono text-xl">+52 722 213 0378</span></p>
-                        <p class="text-sm mt-2 text-gray-400">Línea de atención nacional: 01 800 911 2000 (CECIADIC)</p>
+                        <p class="mb-1 text-base">Teléfono de Apoyo (CIJ Local): <span class="text-white font-mono text-xl">+52 722 213 0378</span></p>
+                        <p class="text-sm mt-2 text-gray-400">CIJ NACIONAL: 55 5212 1212</p>
                     </div>
                 </div>
             `;
