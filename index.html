@@ -203,6 +203,21 @@
         .consumo-option input[type="radio"] {
             margin-right: 0.5rem;
         }
+
+        /* Estilos para Pestaña de Contexto */
+        .context-card {
+            background-color: #fff;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1rem;
+            border-top: 4px solid #10b981;
+        }
+        .context-card h3 {
+            font-weight: 800;
+            color: #047857;
+            margin-bottom: 0.5rem;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -218,13 +233,73 @@
     <!-- Contenido Principal: Pestañas -->
     <main class="container mx-auto p-4 md:p-8">
         <div class="flex border-b-2 border-gray-300">
+            <button class="tab-button" onclick="openTab(event, 'Contexto')">Contexto Rápido</button>
             <button class="tab-button active" onclick="openTab(event, 'Temas')">Temas de Prevención</button>
             <button class="tab-button" onclick="openTab(event, 'Test')">Test y Autoevaluación</button>
             <button class="tab-button" onclick="openTab(event, 'Juegos')">Juegos y Retos</button>
         </div>
+        
+        <!-- Contenido de la Pestaña "Contexto Rápido" (NUEVO) -->
+        <div id="Contexto" class="tab-content hidden">
+            <h2 class="text-4xl section-title mt-6 mb-8 pb-3 border-b-4 border-indigo-300">Contexto Rápido: La Verdad en Corto</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                <div class="context-card">
+                    <h3>¿Qué es el Tabaco?</h3>
+                                        <p class="text-sm">El tabaco (o vapeo) es una <strong>droga estimulante</strong>. Contiene <strong>Nicotina</strong>, una de las sustancias más adictivas. Al inhalar el humo, recibes más de 7,000 sustancias químicas (como alquitrán y cianuro). ¡Al menos 70 pueden causar <strong>cáncer</strong>!</p>
+                    <p class="mt-2 text-xs font-semibold text-green-700">Clasificación: Droga Estimulante</p>
+                </div>
+
+                <div class="context-card">
+                    <h3>Efectos Inmediatos vs. Abstinencia</h3>
+                                        <p class="text-sm"><strong>Efectos Inmediatos:</strong> Sensación de alerta, estimulación y mareo. Falsa percepción de relajación y concentración.</p>
+                    <p class="mt-2 text-sm"><strong>Síndrome de Abstinencia:</strong> Es el peor ciclo. Si dejas de fumar, sientes: Deseo incontrolable, irritabilidad, dificultad para concentrarte, aumento de apetito y **ansiedad** o estados depresivos.</p>
+                </div>
+
+                <div class="context-card md:col-span-2">
+                    <h3>Consecuencias Clave del Consumo</h3>
+                                        <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4 text-sm">
+                        <li>Mal aliento y <strong>dientes manchados</strong>.</li>
+                        <li>Dificultades para respirar y practicar deportes.</li>
+                        <li>Falta de sensibilidad en papilas gustativas (la comida sabe menos).</li>
+                        <li>Resequedad de la piel y arrugas prematuras.</li>
+                        <li>Insomnio y <strong>úlceras estomacales</strong>.</li>
+                        <li>Enfermedades respiratorias crónicas (tos, asma, enfisema, bronquitis).</li>
+                        <li>Agravamiento de dolores de cabeza y migraña.</li>
+                    </ul>
+                </div>
+
+                <div class="context-card md:col-span-2">
+                    <h3>Otros Riesgos de Vida (¡Esto es Serio!)</h3>
+                                        <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4 text-sm">
+                        <li><strong>Cáncer</strong> de pulmón, boca, garganta, esófago, vejiga, páncreas, riñón, útero y mamas.</li>
+                        <li>Complicaciones cardíacas y <strong>derrame cerebral</strong>.</li>
+                        <li><strong>En hombres:</strong> Disfunción eréctil y disminución de espermatozoides.</li>
+                        <li><strong>En el embarazo:</strong> Aumenta la probabilidad de aborto, muerte súbita de recién nacidos y bajo peso.</li>
+                        <li>Arterioesclerosis (depósitos de grasa que tapan las arterias).</li>
+                        <li>Enfermedad Pulmonar Obstructiva Crónica (EPOC).</li>
+                    </ul>
+                </div>
+                
+                <div class="context-card">
+                    <h3>Señales de Alerta (¡Pide Ayuda!)</h3>
+                                        <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4 text-sm">
+                        <li>Mal olor en el cabello, piel y ropa.</li>
+                        <li>Dedos amarillos y dientes manchados.</li>
+                        <li>Baja resistencia física por falta de oxígeno.</li>
+                        <li>Dolor de cabeza constante.</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Bloque CIJ (NUEVO) -->
+            <div id="cij-block-context" class="mt-8 pt-6 border-t-2 border-indigo-200">
+                <!-- CIJ Info se insertará aquí -->
+            </div>
+        </div>
+
 
         <!-- Contenido de la Pestaña "Temas" -->
-        <div id="Temas" class="tab-content">
+        <div id="Temas" class="tab-content active">
             <div class="flex justify-between items-center mt-6 mb-8 pb-3 border-b-4 border-indigo-300">
                 <h2 class="text-4xl section-title">Nuestros Retos de Prevención</h2>
                 <button onclick="exportToPDF()" class="bg-red-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg hover:bg-red-600 transition duration-150 flex items-center">
@@ -270,7 +345,7 @@
                     <!-- Acordeón: Mitos y Realidades -->
                     <div class="mb-4">
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-mitos')">
-                            <img src="https://images.unsplash.com/photo-1518173514751-6156e30b62e4?q=80&w=1280&fit=max" alt="Dos caras, una con duda y otra con certeza" class="accordion-image mr-4">
+                            <img src="https://placehold.co/600x120/f9fafb/374151?text=Desafio+Mental+Mitos" alt="Dos caras, una con duda y otra con certeza" class="accordion-image mr-4">
                             #1. ¡Desafío Mental! Mitos vs. Realidades
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-mitos" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -285,7 +360,7 @@
                     <!-- Acordeón: Componentes Tóxicos Interactivos -->
                     <div class="mb-4">
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-toxicos')">
-                            <img src="https://images.unsplash.com/photo-1588665301824-345339f40073?q=80&w=1280&fit=max" alt="Sustancias químicas en frascos" class="accordion-image mr-4">
+                            <img src="https://placehold.co/600x120/f9fafb/374151?text=Sustancias+Quimicas+Toxicas" alt="Sustancias químicas en frascos" class="accordion-image mr-4">
                             #2. Laboratorio Tóxico: ¿Con qué Fumas?
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-toxicos" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -300,7 +375,7 @@
                     <!-- Acordeón: RADIOGRAFÍA DEL CIGARRO -->
                     <div class="mb-4">
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-humo')">
-                            <img src="https://images.unsplash.com/photo-1544258838-89fa281b3152?q=80&w=1280&fit=max" alt="Humo en ambiente cerrado" class="accordion-image mr-4">
+                            <img src="https://placehold.co/600x120/f9fafb/374151?text=Humo+en+ambiente+cerrado" alt="Humo en ambiente cerrado" class="accordion-image mr-4">
                             #3. ¡Tu Decisión Crea 3 Tipos de Humo!
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-humo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -318,7 +393,7 @@
                     <!-- Acordeón: Efectos a Corto Plazo -->
                     <div class="mb-4">
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-cortoplazo')">
-                            <img src="https://images.unsplash.com/photo-1547076332-ceab5060824b?q=80&w=1280&fit=max" alt="Pulmones en chequeo médico" class="accordion-image mr-4">
+                            <img src="https://placehold.co/600x120/f9fafb/374151?text=Pulmones+en+chequeo+medico" alt="Pulmones en chequeo médico" class="accordion-image mr-4">
                             #4. Efectos Físicos a <strong>Corto Plazo</strong> (¡Sientes el daño al momento!)
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-cortoplazo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -337,12 +412,12 @@
                     <!-- Acordeón: Consecuencias a Largo Plazo -->
                     <div class="mb-4">
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-largoplazo')">
-                            <img src="https://images.unsplash.com/photo-1599380696989-14a8080f074d?q=80&w=1280&fit=max" alt="Ilustración de corazón y arterias dañadas" class="accordion-image mr-4">
+                            <img src="https://placehold.co/600x120/f9fafb/374151?text=Ilustracion+de+corazon+y+arterias+danadas" alt="Ilustración de corazón y arterias dañadas" class="accordion-image mr-4">
                             #5. Consecuencias a <strong>Largo Plazo</strong> (¡Tu futuro en riesgo!)
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-largoplazo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div id="content-largoplazo" class="accordion-content">
-                            <img src="https://images.unsplash.com/photo-1584889104128-43d5267a5b3a?q=80&w=1280&fit=max" alt="Radiografía de pulmones mostrando daño" class="w-full h-48 object-cover rounded-lg mb-4">
+                                                        <img src="https://placehold.co/400x120/f9fafb/374151?text=Radiografia+de+pulmones" alt="Radiografía de pulmones mostrando daño" class="w-full h-48 object-cover rounded-lg mb-4">
                             <ul class="list-disc list-inside text-gray-700 ml-4 space-y-1">
                                 <li><strong>Causa adicción</strong> y menos resistencia física.</li>
                                 <li><strong>Cáncer:</strong> Boca, garganta, pulmón, páncreas, riñones, sangre, entre otros.</li>
@@ -357,7 +432,7 @@
                     <!-- Acordeón: BENEFICIOS de Suspender su Uso (NUEVO) -->
                     <div class="mb-4">
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-beneficios')">
-                            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1280&fit=max" alt="Corriendo en la playa sintiendo libertad" class="accordion-image mr-4">
+                            <img src="https://placehold.co/600x120/f9fafb/374151?text=Corriendo+en+la+playa+sintiendo+libertad" alt="Corriendo en la playa sintiendo libertad" class="accordion-image mr-4">
                             #6. ¡El Premio! Beneficios de <strong>Suspender su Uso</strong>
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-beneficios" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -377,7 +452,7 @@
                     <!-- Acordeón: Consecuencias Psicológicas y Sociales (NUEVO) -->
                     <div class="mb-4">
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-consecuencias')">
-                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1280&fit=max" alt="Grupo de jóvenes en discusión" class="accordion-image mr-4">
+                            <img src="https://placehold.co/600x120/f9fafb/374151?text=Grupo+de+jovenes+en+discusion" alt="Grupo de jóvenes en discusión" class="accordion-image mr-4">
                             #7. Consecuencias Psicológicas, Familiares y Sociales
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-consecuencias" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -392,7 +467,7 @@
                     <!-- Acordeón: Técnicas para decir NO -->
                     <div class="mb-4">
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-tecnicasno')">
-                            <img src="https://images.unsplash.com/photo-1517457210348-b767079e8e7a?q=80&w=1280&fit=max" alt="Jóvenes negándose a algo" class="accordion-image mr-4">
+                            <img src="https://placehold.co/600x120/f9fafb/374151?text=Jovenes+negandose+a+fumar" alt="Jóvenes negándose a algo" class="accordion-image mr-4">
                             #8. Técnicas para decir NO (¡Tu poder de Asertividad!)
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-tecnicasno" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -420,7 +495,7 @@
                     <!-- Acordeón: Mito Derribado -->
                     <div class="mb-4">
                         <button class="accordion-button bg-blue-100 text-blue-700 hover:bg-blue-200" onclick="toggleAccordion('content-mito')">
-                            <img src="https://images.unsplash.com/photo-1544377193-3e11739f75a7?q=80&w=1280&fit=max" alt="Joven estresado fumando (Mito)" class="accordion-image mr-4">
+                            <img src="https://placehold.co/600x120/f9fafb/374151?text=Joven+estresado+fumando" alt="Joven estresado fumando (Mito)" class="accordion-image mr-4">
                             #1. ¡Mito Derribado! El Tabaco NO Relaja
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-mito" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -433,7 +508,7 @@
                     <!-- Acordeón: Control de Enojo -->
                     <div class="mb-4">
                         <button class="accordion-button bg-blue-100 text-blue-700 hover:bg-blue-200" onclick="toggleAccordion('content-enojo')">
-                            <img src="https://images.unsplash.com/photo-1558284560-934336c1a82f?q=80&w=1280&fit=max" alt="Joven frustrado o enojado" class="accordion-image mr-4">
+                            <img src="https://placehold.co/600x120/f9fafb/374151?text=Joven+frustrado+o+enojado" alt="Joven frustrado o enojado" class="accordion-image mr-4">
                             #2. El Control Remoto de tu Enojo
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-enojo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -449,7 +524,7 @@
                     <!-- Acordeón: Técnica Antiestrés -->
                     <div class="mb-4">
                         <button class="accordion-button bg-blue-100 text-blue-700 hover:bg-blue-200" onclick="toggleAccordion('content-antiestres')">
-                            <img src="https://images.pexels.com/photos/3845625/pexels-photo-3845625.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Persona meditando calmadamente" class="accordion-image mr-4">
+                            <img src="https://placehold.co/600x120/f9fafb/374151?text=Persona+meditando+calmadamente" alt="Persona meditando calmadamente" class="accordion-image mr-4">
                             #3. Técnica Antiestrés: Respiración 4x4
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-antiestres" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -478,7 +553,7 @@
                     <!-- Acordeón: La Balanza -->
                     <div class="mb-4">
                         <button class="accordion-button bg-green-100 text-green-700 hover:bg-green-200" onclick="toggleAccordion('content-balanza')">
-                            <img src="https://images.unsplash.com/photo-1590403758364-b040a4555025?q=80&w=1280&fit=max" alt="Una balanza de justicia" class="accordion-image mr-4">
+                            <img src="https://placehold.co/600x120/f9fafb/374151?text=Balanza+de+Justicia+Decisional" alt="Una balanza de justicia" class="accordion-image mr-4">
                             #1. La Balanza de tu Decisión (Balance Decisional)
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-balanza" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -491,7 +566,7 @@
                     <!-- Acordeón: Factores de Riesgo (Reubicado) -->
                     <div class="mb-4">
                         <button class="accordion-button bg-green-100 text-green-700 hover:bg-green-200" onclick="toggleAccordion('content-factores')">
-                            <img src="https://images.unsplash.com/photo-1593113598733-4b6795f51954?q=80&w=1280&fit=max" alt="Adolescente reflexivo" class="accordion-image mr-4">
+                            <img src="https://placehold.co/600x120/f9fafb/374151?text=Adolescente+reflexivo+Factores+Riesgo" alt="Adolescente reflexivo" class="accordion-image mr-4">
                             #2. Factores de Riesgo (Familiar y Social)
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-factores" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -507,7 +582,7 @@
                     <!-- Acordeón: Autoestima -->
                     <div class="mb-4">
                         <button class="accordion-button bg-green-100 text-green-700 hover:bg-green-200" onclick="toggleAccordion('content-autoestima')">
-                            <img src="https://images.unsplash.com/photo-1533228385265-d60232490d18?q=80&w=1280&fit=max" alt="Joven con brazos levantados celebrando" class="accordion-image mr-4">
+                            <img src="https://placehold.co/600x120/f9fafb/374151?text=Joven+celebrando+Autoestima+Alta" alt="Joven con brazos levantados celebrando" class="accordion-image mr-4">
                              #3. Tu Escudo Protector: ¡La Autoestima!
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-autoestima" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -534,12 +609,12 @@
             <!-- Acordeón: Test de Asertividad -->
             <div class="mb-4">
                 <button class="accordion-button bg-indigo-100 text-indigo-700 hover:bg-indigo-200" onclick="toggleAccordion('content-asertividad-test')">
-                    <img src="https://images.unsplash.com/photo-1627843058865-c3286f9d3b0c?q=80&w=1280&fit=max" alt="Persona con un checklist gigante" class="accordion-image mr-4">
+                    <img src="https://placehold.co/600x120/f9fafb/374151?text=Test+de+Comunicacion+Asertiva" alt="Persona con un checklist gigante" class="accordion-image mr-4">
                     #1. ¿Qué Estilo de Comunicación Tienes? (Test de Asertividad)
                     <svg class="w-4 h-4 accordion-arrow" id="arrow-content-asertividad-test" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
                 <div id="content-asertividad-test" class="accordion-content">
-                    <p class="text-gray-700 mb-4">Descubre si tu forma de hablar es **Pasiva, Agresiva o Asertiva**. ¡Marca con cuál te identificas más!</p>
+                    <p class="text-gray-700 mb-4">Descubre si tu forma de hablar es <strong>Pasiva, Agresiva o Asertiva</strong>. ¡Marca con cuál te identificas más!</p>
                     <div id="asertividad-questions-container" class="space-y-4">
                         <!-- Preguntas generadas por JS -->
                     </div>
@@ -555,7 +630,7 @@
             <!-- Acordeón: Test Consumo (MIGRADO DEL TEMA 3) -->
             <div class="mb-4">
                 <button class="accordion-button bg-green-100 text-green-700 hover:bg-green-200" onclick="toggleAccordion('content-consumo-test')">
-                    <img src="https://images.unsplash.com/photo-1542838132-9097e3a9a850?q=80&w=1280&fit=max" alt="Cuestionario o evaluación médica" class="accordion-image mr-4">
+                    <img src="https://placehold.co/600x120/f9fafb/374151?text=Cuestionario+Evaluacion+Consumo" alt="Cuestionario o evaluación médica" class="accordion-image mr-4">
                     #2. ¿Qué Tanto Fumas? (Test de Evaluación de Consumo)
                     <svg class="w-4 h-4 accordion-arrow" id="arrow-content-consumo-test" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
@@ -576,7 +651,7 @@
             <!-- Acordeón: Semaforo de Alerta (MIGRADO DEL TEMA 3) -->
             <div class="mb-4">
                 <button class="accordion-button bg-yellow-100 text-yellow-700 hover:bg-yellow-200" onclick="toggleAccordion('content-semaforo')">
-                    <img src="https://images.unsplash.com/photo-1542838132-9097e3a9a850?q=80&w=1280&fit=max" alt="Señales de alerta o semáforo" class="accordion-image mr-4">
+                    <img src="https://placehold.co/600x120/f9fafb/374151?text=Semaforo+de+Alerta+Riesgo" alt="Señales de alerta o semáforo" class="accordion-image mr-4">
                     #3. ¡Semáforo de Alerta! ¿Necesitas ayuda?
                     <svg class="w-4 h-4 accordion-arrow" id="arrow-content-semaforo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
@@ -597,7 +672,7 @@
             <!-- Acordeón: Test ÁMBITO PERSONAL (MIGRADO DEL TEMA 3) -->
             <div class="mb-4">
                 <button class="accordion-button bg-indigo-100 text-indigo-700 hover:bg-indigo-200" onclick="toggleAccordion('content-personal-test')">
-                     <img src="https://images.unsplash.com/photo-1627843058865-c3286f9d3b0c?q=80&w=1280&fit=max" alt="Persona con un checklist gigante" class="accordion-image mr-4">
+                     <img src="https://placehold.co/600x120/f9fafb/374151?text=Test+Ambito+Personal+Proteccion" alt="Persona con un checklist gigante" class="accordion-image mr-4">
                     #4. ¿Qué Tanta Protección Tienes? (Test Personal)
                     <svg class="w-4 h-4 accordion-arrow" id="arrow-content-personal-test" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
@@ -683,32 +758,32 @@
             {
                 mito: "Unos pocos cigarros al día no hacen mal.",
                 realidad: "FALSO. Fumar tan solo 3 a 5 cigarros al día ya te pone en riesgo de sufrir problemas cardiovasculares.",
-                image: "https://images.unsplash.com/photo-1594951465223-b6d4949a2a7f?q=80&w=1280&fit=max" 
+                image: "https://placehold.co/600x120/f9fafb/374151?text=Desafio+Mental+Mitos"
             },
             {
                 mito: "Estar expuesto(a) al humo no mata.",
                 realidad: "FALSO. 30 minutos de exposición pasiva son suficientes para aumentar el riesgo de infarto en personas sanas. El humo ambiental causa 600 mil muertes prematuras en el mundo.",
-                image: "https://images.unsplash.com/photo-1511512574047-832c3ef50f14?q=80&w=1280&fit=max"
+                image: "https://placehold.co/600x120/f9fafb/374151?text=Humo+en+ambiente+cerrado"
             },
             {
                 mito: "Fumar un cigarro relaja y alivia el estrés.",
                 realidad: "FALSO. La nicotina es un <strong>estimulante</strong>. La sensación de 'alivio' es solo calmar la <strong>abstinencia</strong> que la misma adicción te causa.",
-                image: "https://images.unsplash.com/photo-1533228385265-d60232490d18?q=80&w=1280&fit=max"
+                image: "https://placehold.co/600x120/f9fafb/374151?text=Joven+estresado+fumando"
             },
             {
                 mito: "Los cigarros 'light' no hacen daño.",
                 realidad: "FALSO. Contienen los mismos componentes cancerígenos que los convencionales. Tu cuerpo compensa inhalando más fuerte.",
-                image: "https://images.unsplash.com/photo-1621539281512-87002e1c313a?q=80&w=1280&fit=max"
+                image: "https://placehold.co/600x120/f9fafb/374151?text=Cigarros+light+no+hacen+dano"
             },
             {
                 mito: "El problema de fumar es solo mío.",
                 realidad: "FALSO. El humo libera miles de tóxicos. Quienes están a tu alrededor se vuelven <strong>fumadores pasivos</strong> y reciben las mismas sustancias dañinas.",
-                image: "https://images.unsplash.com/photo-1529156069894-432a933f7572?q=80&w=1280&fit=max"
+                image: "https://placehold.co/600x120/f9fafb/374151?text=El+problema+de+fumar+es+solo+mio"
             },
             {
                 mito: "Las áreas separadas solucionan el problema.",
                 realidad: "FALSO. Sin ventilación independiente, el aire se comparte y la contaminación se propaga. Fumar en un área separada sigue afectando a los no fumadores.",
-                image: "https://images.unsplash.com/photo-1585481717616-95331f24d7b2?q=80&w=1280&fit=max"
+                image: "https://placehold.co/600x120/f9fafb/374151?text=Areas+separadas+solucionan+el+problema"
             }
         ];
 
@@ -952,7 +1027,7 @@
                 // Asertivo
                 emoji = '😎';
                 message = `<p class="font-black text-xl mb-2 text-indigo-800">¡Eres <strong>Asertivo/a</strong>! ${emoji}</p>
-                           <p>Tienes la mejor forma de comunicarte. Logras decir lo que piensas, sientes y quieres de forma **clara y respetuosa**, sin herir a nadie. ¡Difícilmente alguien podrá presionarte para fumar! Sigue así.</p>`;
+                           <p>Tienes la mejor forma de comunicarte. Logras decir lo que piensas, sientes y quieres de forma <strong>clara y respetuosa</strong>, sin herir a nadie. ¡Difícilmente alguien podrá presionarte para fumar! Sigue así.</p>`;
                 style = 'bg-indigo-100 border-l-4 border-indigo-500';
             } else if (predominantStyles.includes('P') && maxScore >= 3) {
                 // Pasivo
@@ -1234,16 +1309,18 @@
                 </div>
             `;
             
-            // Reemplazar el contenido de los bloques CIJ en cada Tema y en la pestaña Test
+            // Reemplazar el contenido de los bloques CIJ en cada Tema, Test y Contexto
             const block1 = document.getElementById('cij-block-1');
             const block2 = document.getElementById('cij-block-2');
             const block3 = document.getElementById('cij-block-3');
             const blockTest = document.getElementById('cij-block-test');
+            const blockContext = document.getElementById('cij-block-context'); // NUEVO
             
             if(block1) block1.innerHTML = cijHtml;
             if(block2) block2.innerHTML = cijHtml;
             if(block3) block3.innerHTML = cijHtml;
             if(blockTest) blockTest.innerHTML = cijHtml;
+            if(blockContext) blockContext.innerHTML = cijHtml; // NUEVO
         }
         
         // --- Exportación a PDF (NUEVO) ---
