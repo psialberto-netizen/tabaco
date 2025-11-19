@@ -89,7 +89,7 @@
         .toxico-card { background-color: #fef2f2; border-color: #fecaca; }
         .toxico-card:hover { background-color: #fee2e2; }
 
-        /* Colores Tarjetas Consecuencias (NUEVO) */
+        /* Colores Tarjetas Consecuencias */
         .consecuencia-card-pink { background-color: #fdf2f8; border-color: #fbcfe8; }
         .consecuencia-card-pink:hover { background-color: #fce7f3; }
         .consecuencia-card-yellow { background-color: #fefce8; border-color: #fef08a; }
@@ -294,24 +294,24 @@
                 
                 <div class="context-card">
                     <h3>¿Qué es el Tabaco?</h3>
-                    <!-- Nota: Subir ima1.png a la raíz del proyecto -->
-                    <img src="./ima1.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima1.png'" alt="Planta de tabaco y humo clasificado como droga" class="accordion-image mb-4">
+                    <!-- NOTA: Subir ima1.png a la raíz del proyecto -->
+                    <img src="./ima1.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima1.png'" alt="Planta de tabaco y humo clasificado como droga" class="accordion-image mb-4 cursor-pointer">
                     <p class="text-lg">El tabaco (o vapeo) es una <strong>droga estimulante</strong>. Contiene <strong>Nicotina</strong>, una de las sustancias más adictivas. Al inhalar el humo, recibes más de 7,000 sustancias químicas (como alquitrán y cianuro). ¡Al menos 70 pueden causar <strong>cáncer</strong>!</p>
                     <p class="mt-2 text-base font-semibold text-green-700">Clasificación: Droga Estimulante</p>
                 </div>
 
                 <div class="context-card">
                     <h3>Efectos Inmediatos vs. Abstinencia</h3>
-                    <!-- Nota: Subir ima2.png a la raíz del proyecto -->
-                    <img src="./ima2.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima2.png'" alt="Joven sintiendo euforia y luego ansiedad por abstinencia" class="accordion-image mb-4">
+                    <!-- NOTA: Subir ima2.png a la raíz del proyecto -->
+                    <img src="./ima2.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima2.png'" alt="Joven sintiendo euforia y luego ansiedad por abstinencia" class="accordion-image mb-4 cursor-pointer">
                     <p class="text-lg"><strong>Efectos Inmediatos:</strong> Sensación de alerta, estimulación y mareo. Falsa percepción de relajación y concentración.</p>
                     <p class="mt-2 text-lg"><strong>Síndrome de Abstinencia:</strong> Es el peor ciclo. Si dejas de fumar, sientes: Deseo incontrolable, irritabilidad, dificultad para concentrarse, aumento de apetito y <strong>ansiedad</strong> o estados depresivos.</p>
                 </div>
 
                 <div class="context-card md:col-span-2">
                     <h3>Consecuencias Clave del Consumo</h3>
-                    <!-- Nota: Subir ima3.png a la raíz del proyecto -->
-                    <img src="./ima3.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima3.png'" alt="Dentadura manchada y tos constante" class="accordion-image mb-4">
+                    <!-- NOTA: Subir ima3.png a la raíz del proyecto -->
+                    <img src="./ima3.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima3.png'" alt="Dentadura manchada y tos constante" class="accordion-image mb-4 cursor-pointer">
                     <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4 text-base">
                         <li>Mal aliento y <strong>dientes manchados</strong>.</li>
                         <li>Dificultades para respirar y practicar deportes.</li>
@@ -325,10 +325,10 @@
 
                 <div class="context-card md:col-span-2">
                     <h3>Otros Riesgos de Vida (¡Esto es Serio!)</h3>
-                    <!-- Nota: Subir ima4.png a la raíz del proyecto -->
-                    <img src="./ima4.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima4.png'" alt="Corazón y cerebro en riesgo por tabaco" class="accordion-image mb-4">
+                    <!-- NOTA: Subir ima4.png a la raíz del proyecto -->
+                    <img src="./ima4.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima4.png'" alt="Corazón y cerebro en riesgo por tabaco" class="accordion-image mb-4 cursor-pointer">
                     <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4 text-base">
-                        <li><strong>Cáncer</strong> de pulmón, boca, garganta, esófago, vejiga, páncreas, riñón, útero y mamas.</li>
+                        <li><strong>Cáncer</strong> de pulmón, boca, garganta, esófago, vejiga, páncreas, riñones, sangre, entre otros.</li>
                         <li>Complicaciones cardíacas y <strong>derrame cerebral</strong>.</li>
                         <li><strong>En hombres:</strong> Disfunción eréctil y disminución de espermatozoides.</li>
                         <li><strong>En el embarazo:</strong> Aumenta la probabilidad de aborto, muerte súbita de recién nacidos y bajo peso.</li>
@@ -339,8 +339,8 @@
                 
                 <div class="context-card">
                     <h3>Señales de Alerta (¡Pide Ayuda!)</h3>
-                    <!-- Nota: Subir ima5.png a la raíz del proyecto -->
-                    <img src="./ima5.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima5.png'" alt="Semaforo de señales de alerta de consumo" class="accordion-image mb-4">
+                    <!-- NOTA: Subir ima5.png a la raíz del proyecto -->
+                    <img src="./ima5.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima5.png'" alt="Semaforo de señales de alerta de consumo" class="accordion-image mb-4 cursor-pointer">
                     <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4 text-base">
                         <li>Mal olor en el cabello, piel y ropa.</li>
                         <li>Dedos amarillos y dientes manchados.</li>
@@ -359,7 +359,7 @@
         <!-- Contenido de la Pestaña "Temas" -->
         <div id="Temas" class="tab-content active">
             <div class="flex justify-between items-center mt-6 mb-8 pb-3 border-b-4 border-indigo-300">
-                <h2 class="text-4xl section-title">Nuestros Retos de Prevención</h2>
+                <h2 class="text-4xl font-black text-red-700 tracking-tight md:text-5xl">Nuestros Retos de Prevención</h2>
                 <button onclick="exportToPDF()" class="bg-red-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg hover:bg-red-600 transition duration-150 flex items-center">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                     Exportar Temas a PDF
@@ -403,8 +403,8 @@
                     <!-- Acordeón: Mitos y Realidades -->
                     <div class="mb-4">
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-mitos')">
-                            <!-- Nota: Subir ima6.png a la raíz del proyecto -->
-                            <img src="./ima6.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima6.png'" alt="Dos caras, una con duda y otra con certeza" class="accordion-image mr-4">
+                            <!-- NOTA: Subir ima6.png a la raíz del proyecto -->
+                            <img src="./ima6.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima6.png'" alt="Dos caras, una con duda y otra con certeza" class="accordion-image mr-4 cursor-pointer">
                             #1. ¡Desafío Mental! Mitos vs. Realidades
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-mitos" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -419,8 +419,8 @@
                     <!-- Acordeón: Componentes Tóxicos Interactivos -->
                     <div class="mb-4">
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-toxicos')">
-                            <!-- Nota: Subir ima7.png a la raíz del proyecto -->
-                            <img src="./ima7.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima7.png'" alt="Sustancias químicas en frascos" class="accordion-image mr-4">
+                            <!-- NOTA: Subir ima7.png a la raíz del proyecto -->
+                            <img src="./ima7.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima7.png'" alt="Sustancias químicas en frascos" class="accordion-image mr-4 cursor-pointer">
                             #2. Laboratorio Tóxico: ¿Con qué Fumas?
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-toxicos" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -435,8 +435,8 @@
                     <!-- Acordeón: RADIOGRAFÍA DEL CIGARRO -->
                     <div class="mb-4">
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-humo')">
-                            <!-- Nota: Subir ima8.png a la raíz del proyecto -->
-                            <img src="./ima8.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima8.png'" alt="Humo en ambiente cerrado" class="accordion-image mr-4">
+                            <!-- NOTA: Subir ima8.png a la raíz del proyecto -->
+                            <img src="./ima8.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima8.png'" alt="Humo en ambiente cerrado" class="accordion-image mr-4 cursor-pointer">
                             #3. ¡Tu Decisión Crea 3 Tipos de Humo!
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-humo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -454,8 +454,8 @@
                     <!-- Acordeón: Efectos a Corto Plazo -->
                     <div class="mb-4">
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-cortoplazo')">
-                            <!-- Nota: Subir ima9.png a la raíz del proyecto -->
-                            <img src="./ima9.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima9.png'" alt="Pulmones en chequeo médico" class="accordion-image mr-4">
+                            <!-- NOTA: Subir ima9.png a la raíz del proyecto -->
+                            <img src="./ima9.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima9.png'" alt="Pulmones en chequeo médico" class="accordion-image mr-4 cursor-pointer">
                             #4. Efectos Físicos a <strong>Corto Plazo</strong> (¡Sientes el daño al momento!)
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-cortoplazo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -474,14 +474,14 @@
                     <!-- Acordeón: Consecuencias a Largo Plazo -->
                     <div class="mb-4">
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-largoplazo')">
-                            <!-- Nota: Subir ima10.png a la raíz del proyecto -->
-                            <img src="./ima10.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima10.png'" alt="Ilustración de corazón y arterias dañadas" class="accordion-image mr-4">
+                            <!-- NOTA: Subir ima10.png a la raíz del proyecto -->
+                            <img src="./ima10.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima10.png'" alt="Ilustración de corazón y arterias dañadas" class="accordion-image mr-4 cursor-pointer">
                             #5. Consecuencias a <strong>Largo Plazo</strong> (¡Tu futuro en riesgo!)
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-largoplazo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div id="content-largoplazo" class="accordion-content">
-                            <!-- Nota: Subir ima11.png a la raíz del proyecto -->
-                            <img src="./ima11.png" onerror="this.onerror=null; this.src='https://placehold.co/400x120/f9fafb/374151?text=Subir+ima11.png'" alt="Radiografía de pulmones mostrando daño" class="w-full h-48 object-cover rounded-lg mb-4">
+                            <!-- NOTA: Subir ima11.png a la raíz del proyecto -->
+                            <img src="./ima11.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/400x120/f9fafb/374151?text=Subir+ima11.png'" alt="Radiografía de pulmones mostrando daño" class="w-full h-48 object-cover rounded-lg mb-4 cursor-pointer">
                             <ul class="list-disc list-inside text-gray-700 ml-4 space-y-1">
                                 <li><strong>Causa adicción</strong> y menos resistencia física.</li>
                                 <li><strong>Cáncer:</strong> Boca, garganta, pulmón, páncreas, riñones, sangre, entre otros.</li>
@@ -496,8 +496,8 @@
                     <!-- Acordeón: BENEFICIOS de Suspender su Uso (NUEVO) -->
                     <div class="mb-4">
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-beneficios')">
-                            <!-- Nota: Subir ima12.png a la raíz del proyecto -->
-                            <img src="./ima12.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima12.png'" alt="Corriendo en la playa sintiendo libertad" class="accordion-image mr-4">
+                            <!-- NOTA: Subir ima12.png a la raíz del proyecto -->
+                            <img src="./ima12.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima12.png'" alt="Corriendo en la playa sintiendo libertad" class="accordion-image mr-4 cursor-pointer">
                             #6. ¡El Premio! Beneficios de <strong>Suspender su Uso</strong>
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-beneficios" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -517,8 +517,8 @@
                     <!-- Acordeón: Consecuencias Psicológicas y Sociales (NUEVO) -->
                     <div class="mb-4">
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-consecuencias')">
-                            <!-- Nota: Subir ima13.png a la raíz del proyecto -->
-                            <img src="./ima13.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima13.png'" alt="Grupo de jóvenes en discusión" class="accordion-image mr-4">
+                            <!-- NOTA: Subir ima13.png a la raíz del proyecto -->
+                            <img src="./ima13.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima13.png'" alt="Grupo de jóvenes en discusión" class="accordion-image mr-4 cursor-pointer">
                             #7. Consecuencias Psicológicas, Familiares y Sociales
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-consecuencias" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -533,8 +533,8 @@
                     <!-- Acordeón: Técnicas para decir NO -->
                     <div class="mb-4">
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-tecnicasno')">
-                            <!-- Nota: Subir ima14.png a la raíz del proyecto -->
-                            <img src="./ima14.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima14.png'" alt="Jóvenes negándose a algo" class="accordion-image mr-4">
+                            <!-- NOTA: Subir ima14.png a la raíz del proyecto -->
+                            <img src="./ima14.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima14.png'" alt="Jóvenes negándose a algo" class="accordion-image mr-4 cursor-pointer">
                             #8. Técnicas para decir NO (¡Tu poder de Asertividad!)
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-tecnicasno" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -562,8 +562,8 @@
                     <!-- Acordeón: Mito Derribado -->
                     <div class="mb-4">
                         <button class="accordion-button bg-blue-100 text-blue-700 hover:bg-blue-200" onclick="toggleAccordion('content-mito')">
-                            <!-- Nota: Subir ima15.png a la raíz del proyecto -->
-                            <img src="./ima15.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima15.png'" alt="Joven estresado fumando (Mito)" class="accordion-image mr-4">
+                            <!-- NOTA: Subir ima15.png a la raíz del proyecto -->
+                            <img src="./ima15.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima15.png'" alt="Joven estresado fumando (Mito)" class="accordion-image mr-4 cursor-pointer">
                             #1. ¡Mito Derribado! El Tabaco NO Relaja
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-mito" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -576,8 +576,8 @@
                     <!-- Acordeón: Control de Enojo -->
                     <div class="mb-4">
                         <button class="accordion-button bg-blue-100 text-blue-700 hover:bg-blue-200" onclick="toggleAccordion('content-enojo')">
-                            <!-- Nota: Subir ima16.png a la raíz del proyecto -->
-                            <img src="./ima16.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima16.png'" alt="Joven frustrado o enojado" class="accordion-image mr-4">
+                            <!-- NOTA: Subir ima16.png a la raíz del proyecto -->
+                            <img src="./ima16.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima16.png'" alt="Joven frustrado o enojado" class="accordion-image mr-4 cursor-pointer">
                             #2. El Control Remoto de tu Enojo
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-enojo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -593,8 +593,8 @@
                     <!-- Acordeón: Técnica Antiestrés -->
                     <div class="mb-4">
                         <button class="accordion-button bg-blue-100 text-blue-700 hover:bg-blue-200" onclick="toggleAccordion('content-antiestres')">
-                            <!-- Nota: Subir ima17.png a la raíz del proyecto -->
-                            <img src="./ima17.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima17.png'" alt="Persona meditando calmadamente" class="accordion-image mr-4">
+                            <!-- NOTA: Subir ima17.png a la raíz del proyecto -->
+                            <img src="./ima17.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima17.png'" alt="Persona meditando calmadamente" class="accordion-image mr-4 cursor-pointer">
                             #3. Técnica Antiestrés: Respiración 4x4
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-antiestres" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -623,8 +623,8 @@
                     <!-- Acordeón: La Balanza -->
                     <div class="mb-4">
                         <button class="accordion-button bg-green-100 text-green-700 hover:bg-green-200" onclick="toggleAccordion('content-balanza')">
-                            <!-- Nota: Subir ima18.png a la raíz del proyecto -->
-                            <img src="./ima18.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima18.png'" alt="Una balanza de justicia" class="accordion-image mr-4">
+                            <!-- NOTA: Subir ima18.png a la raíz del proyecto -->
+                            <img src="./ima18.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima18.png'" alt="Una balanza de justicia" class="accordion-image mr-4 cursor-pointer">
                             #1. La Balanza de tu Decisión (Balance Decisional)
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-balanza" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -637,8 +637,8 @@
                     <!-- Acordeón: Factores de Riesgo (Reubicado) -->
                     <div class="mb-4">
                         <button class="accordion-button bg-green-100 text-green-700 hover:bg-green-200" onclick="toggleAccordion('content-factores')">
-                            <!-- Nota: Subir ima19.png a la raíz del proyecto -->
-                            <img src="./ima19.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima19.png'" alt="Adolescente reflexivo" class="accordion-image mr-4">
+                            <!-- NOTA: Subir ima19.png a la raíz del proyecto -->
+                            <img src="./ima19.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima19.png'" alt="Adolescente reflexivo" class="accordion-image mr-4 cursor-pointer">
                             #2. Factores de Riesgo (Familiar y Social)
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-factores" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -654,8 +654,8 @@
                     <!-- Acordeón: Autoestima -->
                     <div class="mb-4">
                         <button class="accordion-button bg-green-100 text-green-700 hover:bg-green-200" onclick="toggleAccordion('content-autoestima')">
-                            <!-- Nota: Subir ima20.png a la raíz del proyecto -->
-                            <img src="./ima20.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima20.png'" alt="Joven con brazos levantados celebrando" class="accordion-image mr-4">
+                            <!-- NOTA: Subir ima20.png a la raíz del proyecto -->
+                            <img src="./ima20.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima20.png'" alt="Joven con brazos levantados celebrando" class="accordion-image mr-4 cursor-pointer">
                              #3. Tu Escudo Protector: ¡La Autoestima!
                             <svg class="w-4 h-4 accordion-arrow" id="arrow-content-autoestima" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -682,8 +682,8 @@
             <!-- Acordeón: Test de Asertividad -->
             <div class="mb-4">
                 <button class="accordion-button bg-indigo-100 text-indigo-700 hover:bg-indigo-200" onclick="toggleAccordion('content-asertividad-test')">
-                    <!-- Nota: Subir ima21.png a la raíz del proyecto -->
-                    <img src="./ima21.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima21.png'" alt="Persona con un checklist gigante" class="accordion-image mr-4">
+                    <!-- NOTA: Subir ima21.png a la raíz del proyecto -->
+                    <img src="./ima21.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima21.png'" alt="Persona con un checklist gigante" class="accordion-image mr-4 cursor-pointer">
                     #1. ¿Qué Estilo de Comunicación Tienes? (Test de Asertividad)
                     <svg class="w-4 h-4 accordion-arrow" id="arrow-content-asertividad-test" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
@@ -704,8 +704,8 @@
             <!-- Acordeón: Test Consumo (MIGRADO DEL TEMA 3) -->
             <div class="mb-4">
                 <button class="accordion-button bg-green-100 text-green-700 hover:bg-green-200" onclick="toggleAccordion('content-consumo-test')">
-                    <!-- Nota: Subir ima22.png a la raíz del proyecto -->
-                    <img src="./ima22.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima22.png'" alt="Cuestionario o evaluación médica" class="accordion-image mr-4">
+                    <!-- NOTA: Subir ima22.png a la raíz del proyecto -->
+                    <img src="./ima22.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima22.png'" alt="Cuestionario o evaluación médica" class="accordion-image mr-4 cursor-pointer">
                     #2. ¿Qué Tanto Fumas? (Test de Evaluación de Consumo)
                     <svg class="w-4 h-4 accordion-arrow" id="arrow-content-consumo-test" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
@@ -726,8 +726,8 @@
             <!-- Acordeón: Semaforo de Alerta (MIGRADO DEL TEMA 3) -->
             <div class="mb-4">
                 <button class="accordion-button bg-yellow-100 text-yellow-700 hover:bg-yellow-200" onclick="toggleAccordion('content-semaforo')">
-                    <!-- Nota: Subir ima23.png a la raíz del proyecto -->
-                    <img src="./ima23.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima23.png'" alt="Señales de alerta o semáforo" class="accordion-image mr-4">
+                    <!-- NOTA: Subir ima23.png a la raíz del proyecto -->
+                    <img src="./ima23.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima23.png'" alt="Señales de alerta o semáforo" class="accordion-image mr-4 cursor-pointer">
                     #3. ¡Semáforo de Alerta! ¿Necesitas ayuda?
                     <svg class="w-4 h-4 accordion-arrow" id="arrow-content-semaforo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
@@ -748,8 +748,8 @@
             <!-- Acordeón: Test ÁMBITO PERSONAL (MIGRADO DEL TEMA 3) -->
             <div class="mb-4">
                 <button class="accordion-button bg-indigo-100 text-indigo-700 hover:bg-indigo-200" onclick="toggleAccordion('content-personal-test')">
-                    <!-- Nota: Subir ima24.png a la raíz del proyecto -->
-                     <img src="./ima24.png" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima24.png'" alt="Persona con un checklist gigante" class="accordion-image mr-4">
+                    <!-- NOTA: Subir ima24.png a la raíz del proyecto -->
+                     <img src="./ima24.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima24.png'" alt="Persona con un checklist gigante" class="accordion-image mr-4 cursor-pointer">
                     #4. ¿Qué Tanta Protección Tienes? (Test Personal)
                     <svg class="w-4 h-4 accordion-arrow" id="arrow-content-personal-test" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
@@ -1147,9 +1147,9 @@
             if (!container) return;
             container.innerHTML = mitosRealidades.map((item, index) => `
                 <div class="reveal-card bg-white shadow-md border-2 border-red-400" onclick="toggleRevealCard(this)">
-                    <p class="font-black text-xl text-red-700 flex justify-between items-center">
-                        <span class="bg-red-200 px-2 py-1 rounded-full text-sm font-bold">MITO</span>
-                        <span class="ml-2">${item.mito}</span>
+                    <p class="font-black text-xl text-red-700 flex justify-between items-center whitespace-normal">
+                        <span class="bg-red-200 px-2 py-1 rounded-full text-sm font-bold flex-shrink-0 mr-2">MITO</span>
+                        <span class="flex-grow">${item.mito}</span>
                     </p>
                     <div class="reveal-info mt-3 border-t pt-2 border-red-200 whitespace-normal">
                          <p class="text-sm font-semibold text-gray-800 flex items-start">
@@ -1341,9 +1341,9 @@
             if (!container) return;
             container.innerHTML = toxicosData.map((toxico, index) => `
                 <div class="reveal-card toxico-card" onclick="toggleRevealCard(this)">
-                    <p class="font-bold text-lg text-red-800 flex justify-between items-center">
+                    <p class="font-bold text-lg text-red-800 flex justify-between items-center whitespace-normal">
                         ${toxico.name}
-                        <span class="text-xs text-red-500 font-medium">USO COMÚN: ${toxico.use}</span>
+                        <span class="text-xs text-red-500 font-medium flex-shrink-0 ml-2">USO COMÚN: ${toxico.use}</span>
                     </p>
                     <div class="reveal-info">
                         <p class="text-sm mt-1"><strong>¡OJO! Daño a tus órganos:</strong> <span class="text-red-600">${toxico.damage}</span></p>
@@ -1368,9 +1368,8 @@
             `).join('');
         }
 
-        // Renders CIJ Info Block with Map (CIJ Location: Calle Morelos Sur 730, Delegación San Sebastián, 50150 Toluca de Lerdo, Méx.)
+        // Renders CIJ Info Block with Map
         function renderCIJBlocks() {
-            // FIX: Using the user-provided URL for the map embed.
             const cijHtml = `
                 <div class="bg-indigo-700 text-white p-6 rounded-lg text-center mt-6">
                     <h3 class="text-2xl font-black mb-3 text-yellow-500">¿Necesitas Ayuda o Más Info?</h3>
@@ -1404,13 +1403,13 @@
             const block2 = document.getElementById('cij-block-2');
             const block3 = document.getElementById('cij-block-3');
             const blockTest = document.getElementById('cij-block-test');
-            const blockContext = document.getElementById('cij-block-context'); // NUEVO
+            const blockContext = document.getElementById('cij-block-context'); 
             
             if(block1) block1.innerHTML = cijHtml;
             if(block2) block2.innerHTML = cijHtml;
             if(block3) block3.innerHTML = cijHtml;
             if(blockTest) blockTest.innerHTML = cijHtml;
-            if(blockContext) blockContext.innerHTML = cijHtml; // NUEVO
+            if(blockContext) blockContext.innerHTML = cijHtml; 
         }
         
         // --- Exportación a PDF (NUEVO) ---
@@ -1464,7 +1463,7 @@
         }
 
 
-        // --- JUEGO 1: MEMORAMA (Código omitido por brevedad, se asume su funcionalidad) ---
+        // --- JUEGO 1: MEMORAMA (Inicialización y lógica) ---
         const memoramaPairs = [
             { id: 1, text: 'Nicotina', match: 'Sustancia que genera adicción.' },
             { id: 2, text: 'Alquitrán', match: 'Residuo pegajoso y cancerígeno.' },
@@ -1558,7 +1557,7 @@
             [firstCard, lockBoard] = [null, false];
         }
 
-        // --- JUEGO 2: RELACIÓN DE COLUMNAS (Código omitido por brevedad, se asume su funcionalidad) ---
+        // --- JUEGO 2: RELACIÓN DE COLUMNAS (Inicialización y lógica) ---
         const columnPairs = [
             { term: 'Asertividad', definition: 'Expresar ideas de forma clara y respetuosa.' },
             { term: 'Balance Decisional', definition: 'Analizar ventajas y desventajas antes de actuar.' },
@@ -1644,7 +1643,7 @@
             }
         }
 
-        // --- JUEGO 3: SOPA DE LETRAS (Código omitido por brevedad, se asume su funcionalidad) ---
+        // --- JUEGO 3: SOPA DE LETRAS (Inicialización y lógica) ---
         const wordsToFind = ['ASERTIVIDAD', 'BALANCE', 'NICOTINA', 'PULMONES', 'ESTRES', 'SALUD', 'NO'];
         const gridSize = 10;
         let grid = Array(gridSize).fill(0).map(() => Array(gridSize).fill(''));
@@ -1698,9 +1697,11 @@
 
                 if (newR < 0 || newR >= gridSize || newC < 0 || newC >= gridSize) return false;
                 if (grid[newR][newC] !== '' && grid[newR][newC].char !== word[i]) return false;
+                if (grid[newR][newC] !== '' && grid[newR][newC].word !== null && grid[newR][newC].word !== word) return false; // Avoid overwriting existing word
             }
             return true;
         }
+
 
         function fillEmptyCells() {
             const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -1727,12 +1728,13 @@
                     cell.addEventListener('mousedown', handleCellStart);
                     cell.addEventListener('touchstart', handleCellStart); // Touch support
                     cell.addEventListener('mouseenter', handleCellHover);
-                    cell.addEventListener('touchmove', handleTouchMove); // Touch support
                     cell.addEventListener('mouseup', handleCellEnd);
                     cell.addEventListener('touchend', handleCellEnd); // Touch support
                     gridEl.appendChild(cell);
                 }
             }
+            // Bind touchmove globally for better tracking
+            document.addEventListener('touchmove', handleTouchMove, { passive: false });
         }
         
         function getCellElement(r, c) {
@@ -1741,6 +1743,8 @@
         
         function getCellFromCoords(x, y) {
             const gridEl = document.getElementById('word-search-grid');
+            if (!gridEl) return null;
+
             const rect = gridEl.getBoundingClientRect();
             if (x < rect.left || x > rect.right || y < rect.top || y > rect.bottom) {
                 return null;
@@ -1752,6 +1756,9 @@
             const c = Math.floor((x - rect.left) / colWidth);
             const r = Math.floor((y - rect.top) / rowHeight);
             
+            // Bounds check after calculation
+            if (r < 0 || r >= gridSize || c < 0 || c >= gridSize) return null;
+            
             return getCellElement(r, c);
         }
 
@@ -1760,23 +1767,10 @@
             e.preventDefault(); // Prevent scrolling
             const touch = e.touches[0];
             const currentCell = getCellFromCoords(touch.clientX, touch.clientY);
-            if (currentCell && currentCell !== endCell) {
+
+            if (currentCell) {
                 // Mimic mouseenter for continuous selection highlighting
-                const startR = parseInt(startCell.dataset.r);
-                const startC = parseInt(startCell.c);
-                const endR = parseInt(currentCell.dataset.r);
-                const endC = parseInt(currentCell.dataset.c);
-
-                document.querySelectorAll('.grid-cell:not(.found)').forEach(cell => cell.classList.remove('selected'));
-                startCell.classList.add('selected');
-
-                const cellsToHighlight = getCellsInLine(startR, startC, endR, endC);
-                cellsToHighlight.forEach(cell => {
-                    const el = getCellElement(cell.r, cell.c);
-                    if (el && !el.classList.contains('found')) {
-                        el.classList.add('selected');
-                    }
-                });
+                handleCellHover.call(currentCell);
                 endCell = currentCell; 
             }
         }
@@ -1787,6 +1781,7 @@
             if (e.type === 'mousedown' && e.button !== 0) return; // Only left click for mouse
 
             startCell = this;
+            endCell = this; // Initialize endCell
             startCell.classList.add('selected');
 
             if (e.type === 'mousedown') {
@@ -1795,13 +1790,13 @@
         }
 
         function handleCellHover() {
-            if (!startCell) return;
-            // Highlight cells between startCell and current cell
+            if (!startCell || this.classList.contains('found')) return;
+            
             const startR = parseInt(startCell.dataset.r);
             const startC = parseInt(startCell.dataset.c);
             const endR = parseInt(this.dataset.r);
             const endC = parseInt(this.dataset.c);
-
+            
             // Clear previous hover selection
             document.querySelectorAll('.grid-cell:not(.found)').forEach(cell => cell.classList.remove('selected'));
             startCell.classList.add('selected');
@@ -1820,6 +1815,7 @@
             if (startCell) {
                 document.querySelectorAll('.grid-cell:not(.found)').forEach(cell => cell.classList.remove('selected'));
                 startCell = null;
+                endCell = null;
             }
         }
 
@@ -1830,15 +1826,16 @@
             // Determine endCell for touch events
             if (e.type === 'touchend') {
                 const touch = e.changedTouches[0];
-                endCell = getCellFromCoords(touch.clientX, touch.clientY);
-                if (!endCell) { // If touch ended outside grid
+                const finalCell = getCellFromCoords(touch.clientX, touch.clientY);
+                if (finalCell) {
+                    endCell = finalCell;
+                } else {
                      handleGridLeave();
                      return;
                 }
             } else { // mouseup
                 endCell = this;
             }
-
 
             const startR = parseInt(startCell.dataset.r);
             const startC = parseInt(startCell.dataset.c);
@@ -1865,57 +1862,22 @@
             let r = r1;
             let c = c1;
 
-            if (r1 === r2 && c1 === c2) { // Handle single cell selection
-                cells.push({ r: r1, c: c1 });
-                return cells;
-            }
-
-            while (true) {
+            while (r !== r2 || c !== c2) {
                 cells.push({ r: r, c: c });
-                if (r === r2 && c === c2) break;
-                
-                // Safety break for unexpected paths, though straight lines should resolve quickly
-                if (cells.length > gridSize * 2) break; 
-
-                // Advance R and C, handling non-straight lines more gracefully if needed, 
-                // but for this game, we only check straight lines
                 if (r !== r2) r += dr;
                 if (c !== c2) c += dc;
-
-                if (r === r2 && c === c2) { // Add the final cell if both reached target simultaneously (diagonal)
-                    cells.push({ r: r, c: c });
-                    break;
-                }
             }
-            
-            // This is a common issue with grid line drawing; ensure the last cell is included if missed.
-            if (!cells.some(cell => cell.r === r2 && cell.c === c2)) {
-                 cells.push({ r: r2, c: c2 });
-            }
-
-
-            // Remove duplicates
-            const uniqueCells = [];
-            const cellMap = new Set();
-            for (const cell of cells) {
-                const key = `${cell.r}-${cell.c}`;
-                if (!cellMap.has(key)) {
-                    cellMap.add(key);
-                    uniqueCells.push(cell);
-                }
-            }
-            
-            return uniqueCells;
+            cells.push({ r: r2, c: c2 });
+            return cells;
         }
+
 
         function checkWord(r1, c1, r2, c2) {
             const cells = getCellsInLine(r1, c1, r2, c2);
             let selectedWord = '';
             
-            // Check if all cells form a valid word in the grid data
-            let cellDataSequence = cells.map(cell => grid[cell.r][cell.c]);
-            
             // Extract forward word
+            let cellDataSequence = cells.map(cell => grid[cell.r][cell.c]);
             selectedWord = cellDataSequence.map(data => data.char).join('');
             
             // Try matching the selected word against target words (forward and reversed)
@@ -1926,8 +1888,15 @@
                 const reversedWord = targetWord.split('').reverse().join('');
                 
                 if (selectedWord === targetWord || selectedWord === reversedWord) {
-                    // Confirm that the selected cell sequence corresponds to a single placed word
-                    const placedWordInSequence = cellDataSequence.every(data => data.word === targetWord || data.word === null);
+                    // Critical check: Ensure all non-null cells in the sequence match the target word
+                    const placedWordInSequence = cellDataSequence.every((data, index) => {
+                        if (data.word === null) return true; // Allows empty filler letters
+                        // Check if the character matches the target word sequence (forward or backward)
+                        if (selectedWord === targetWord) return data.char === targetWord[index];
+                        if (selectedWord === reversedWord) return data.char === reversedWord[index];
+                        return false;
+                    });
+
                     if (placedWordInSequence) {
                          found = true;
                          finalTargetWord = targetWord;
