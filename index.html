@@ -41,6 +41,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            /* Flex-wrap para asegurar que el contenido salte de línea */
+            flex-wrap: wrap; 
         }
         .accordion-content {
             max-height: 0;
@@ -57,6 +59,9 @@
         .accordion-arrow {
             transform: rotate(0deg);
             transition: transform 0.3s;
+            /* Asegurar que la flecha siempre esté a la derecha superior en móviles */
+            align-self: flex-start; 
+            margin-top: 0.5rem;
         }
         .accordion-arrow.open {
             transform: rotate(180deg);
@@ -188,8 +193,43 @@
             object-fit: cover;
             border-radius: 0.5rem;
             margin-bottom: 0.5rem;
-            cursor: pointer; /* Añadido cursor para indicar interactividad */
+            cursor: pointer; 
         }
+        
+        /* Ajuste para móviles: Imagen ocupa su propia línea dentro del botón */
+        .accordion-button > img {
+            width: 100%;
+            height: 120px;
+            margin-right: 0 !important; 
+        }
+        /* Contenedor del título y flecha */
+        .accordion-title-container {
+            flex: 1 1 100%; /* Ocupa toda la línea disponible después de la imagen */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* En desktop, la imagen y el texto pueden ir lado a lado */
+        @media (min-width: 768px) {
+            .accordion-button {
+                flex-wrap: nowrap; /* Desactivar wrap en desktop */
+            }
+            .accordion-button > img {
+                width: 100px; /* Tamaño fijo en desktop */
+                height: 100px;
+                margin-right: 1rem !important; 
+            }
+            .accordion-title-container {
+                flex: 1; /* Ocupa el espacio restante */
+            }
+            .accordion-arrow {
+                align-self: center; /* Centrar flecha en desktop */
+                margin-top: 0;
+            }
+        }
+
+
         /* Estilos específicos para el test de consumo */
         .consumo-question {
             background-color: #fff;
@@ -405,8 +445,10 @@
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-mitos')">
                             <!-- NOTA: Subir ima6.png a la raíz del proyecto -->
                             <img src="./ima6.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima6.png'" alt="Dos caras, una con duda y otra con certeza" class="accordion-image mr-4 cursor-pointer">
-                            #1. ¡Desafío Mental! Mitos vs. Realidades
-                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-mitos" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <div class="accordion-title-container">
+                                <span class="font-bold">#1. ¡Desafío Mental! Mitos vs. Realidades</span>
+                                <svg class="w-4 h-4 accordion-arrow" id="arrow-content-mitos" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
                         </button>
                         <div id="content-mitos" class="accordion-content">
                             <p class="text-gray-700 mb-4 font-semibold">No creas todo lo que ves o escuchas. ¡Haz clic en el Mito para revelar la <strong>REALIDAD</strong>!</p>
@@ -421,8 +463,10 @@
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-toxicos')">
                             <!-- NOTA: Subir ima7.png a la raíz del proyecto -->
                             <img src="./ima7.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima7.png'" alt="Sustancias químicas en frascos" class="accordion-image mr-4 cursor-pointer">
-                            #2. Laboratorio Tóxico: ¿Con qué Fumas?
-                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-toxicos" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <div class="accordion-title-container">
+                                <span class="font-bold">#2. Laboratorio Tóxico: ¿Con qué Fumas?</span>
+                                <svg class="w-4 h-4 accordion-arrow" id="arrow-content-toxicos" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
                         </button>
                         <div id="content-toxicos" class="accordion-content">
                             <p class="text-gray-700 mb-4 font-semibold">El humo tiene <strong>más de 7 mil químicos</strong>, muchos se usan en productos venenosos o industriales. ¡Haz clic para ver dónde terminan!</p>
@@ -437,8 +481,10 @@
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-humo')">
                             <!-- NOTA: Subir ima8.png a la raíz del proyecto -->
                             <img src="./ima8.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima8.png'" alt="Humo en ambiente cerrado" class="accordion-image mr-4 cursor-pointer">
-                            #3. ¡Tu Decisión Crea 3 Tipos de Humo!
-                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-humo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <div class="accordion-title-container">
+                                <span class="font-bold">#3. ¡Tu Decisión Crea 3 Tipos de Humo!</span>
+                                <svg class="w-4 h-4 accordion-arrow" id="arrow-content-humo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
                         </button>
                         <div id="content-humo" class="accordion-content">
                             <p class="text-gray-700 mb-2 font-semibold">Al fumar se generan tres tipos de humo, y todos son tóxicos:</p>
@@ -456,8 +502,10 @@
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-cortoplazo')">
                             <!-- NOTA: Subir ima9.png a la raíz del proyecto -->
                             <img src="./ima9.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima9.png'" alt="Pulmones en chequeo médico" class="accordion-image mr-4 cursor-pointer">
-                            #4. Efectos Físicos a <strong>Corto Plazo</strong> (¡Sientes el daño al momento!)
-                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-cortoplazo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <div class="accordion-title-container">
+                                <span class="font-bold">#4. Efectos Físicos a <strong>Corto Plazo</strong> (¡Sientes el daño al momento!)</span>
+                                <svg class="w-4 h-4 accordion-arrow" id="arrow-content-cortoplazo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
                         </button>
                         <div id="content-cortoplazo" class="accordion-content">
                             <ul class="list-disc list-inside text-gray-700 ml-4 space-y-1">
@@ -476,8 +524,10 @@
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-largoplazo')">
                             <!-- NOTA: Subir ima10.png a la raíz del proyecto -->
                             <img src="./ima10.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima10.png'" alt="Ilustración de corazón y arterias dañadas" class="accordion-image mr-4 cursor-pointer">
-                            #5. Consecuencias a <strong>Largo Plazo</strong> (¡Tu futuro en riesgo!)
-                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-largoplazo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <div class="accordion-title-container">
+                                <span class="font-bold">#5. Consecuencias a <strong>Largo Plazo</strong> (¡Tu futuro en riesgo!)</span>
+                                <svg class="w-4 h-4 accordion-arrow" id="arrow-content-largoplazo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
                         </button>
                         <div id="content-largoplazo" class="accordion-content">
                             <!-- NOTA: Subir ima11.png a la raíz del proyecto -->
@@ -498,8 +548,10 @@
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-beneficios')">
                             <!-- NOTA: Subir ima12.png a la raíz del proyecto -->
                             <img src="./ima12.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima12.png'" alt="Corriendo en la playa sintiendo libertad" class="accordion-image mr-4 cursor-pointer">
-                            #6. ¡El Premio! Beneficios de <strong>Suspender su Uso</strong>
-                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-beneficios" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <div class="accordion-title-container">
+                                <span class="font-bold">#6. ¡El Premio! Beneficios de <strong>Suspender su Uso</strong></span>
+                                <svg class="w-4 h-4 accordion-arrow" id="arrow-content-beneficios" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
                         </button>
                         <div id="content-beneficios" class="accordion-content">
                             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-center text-sm font-semibold text-gray-800">
@@ -519,8 +571,10 @@
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-consecuencias')">
                             <!-- NOTA: Subir ima13.png a la raíz del proyecto -->
                             <img src="./ima13.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima13.png'" alt="Grupo de jóvenes en discusión" class="accordion-image mr-4 cursor-pointer">
-                            #7. Consecuencias Psicológicas, Familiares y Sociales
-                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-consecuencias" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <div class="accordion-title-container">
+                                <span class="font-bold">#7. Consecuencias Psicológicas, Familiares y Sociales</span>
+                                <svg class="w-4 h-4 accordion-arrow" id="arrow-content-consecuencias" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
                         </button>
                         <div id="content-consecuencias" class="accordion-content">
                             <p class="text-gray-700 mb-4 font-semibold">Fumar no solo te daña a ti, impacta todo tu entorno. ¡Haz clic en las tarjetas para ver la neta!</p>
@@ -535,8 +589,10 @@
                         <button class="accordion-button bg-red-100 text-red-700 hover:bg-red-200" onclick="toggleAccordion('content-tecnicasno')">
                             <!-- NOTA: Subir ima14.png a la raíz del proyecto -->
                             <img src="./ima14.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima14.png'" alt="Jóvenes negándose a algo" class="accordion-image mr-4 cursor-pointer">
-                            #8. Técnicas para decir NO (¡Tu poder de Asertividad!)
-                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-tecnicasno" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <div class="accordion-title-container">
+                                <span class="font-bold">#8. Técnicas para decir NO (¡Tu poder de Asertividad!)</span>
+                                <svg class="w-4 h-4 accordion-arrow" id="arrow-content-tecnicasno" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
                         </button>
                         <div id="content-tecnicasno" class="accordion-content">
                             <p class="text-gray-700 mb-2 font-semibold">Usa la <strong>Asertividad</strong> (decir lo que sientes con respeto) para evitar la presión:</p>
@@ -564,8 +620,10 @@
                         <button class="accordion-button bg-blue-100 text-blue-700 hover:bg-blue-200" onclick="toggleAccordion('content-mito')">
                             <!-- NOTA: Subir ima15.png a la raíz del proyecto -->
                             <img src="./ima15.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima15.png'" alt="Joven estresado fumando (Mito)" class="accordion-image mr-4 cursor-pointer">
-                            #1. ¡Mito Derribado! El Tabaco NO Relaja
-                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-mito" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <div class="accordion-title-container">
+                                <span class="font-bold">#1. ¡Mito Derribado! El Tabaco NO Relaja</span>
+                                <svg class="w-4 h-4 accordion-arrow" id="arrow-content-mito" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
                         </button>
                         <div id="content-mito" class="accordion-content">
                             <p class="text-gray-700 mb-2 font-semibold">Psicológicamente, la nicotina es un estimulante. Si sientes "alivio" al fumar, es solo porque estás calmando la <strong>ABSTINENCIA</strong> que tu propio cuerpo ya te pide por la adicción.</p>
@@ -578,8 +636,10 @@
                         <button class="accordion-button bg-blue-100 text-blue-700 hover:bg-blue-200" onclick="toggleAccordion('content-enojo')">
                             <!-- NOTA: Subir ima16.png a la raíz del proyecto -->
                             <img src="./ima16.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima16.png'" alt="Joven frustrado o enojado" class="accordion-image mr-4 cursor-pointer">
-                            #2. El Control Remoto de tu Enojo
-                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-enojo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <div class="accordion-title-container">
+                                <span class="font-bold">#2. El Control Remoto de tu Enojo</span>
+                                <svg class="w-4 h-4 accordion-arrow" id="arrow-content-enojo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
                         </button>
                         <div id="content-enojo" class="accordion-content">
                             <p class="text-gray-700 mb-2 font-semibold">Si el enojo te lleva a hacer cosas que te perjudican (como fumar o pelear), usa estas técnicas:</p>
@@ -595,8 +655,10 @@
                         <button class="accordion-button bg-blue-100 text-blue-700 hover:bg-blue-200" onclick="toggleAccordion('content-antiestres')">
                             <!-- NOTA: Subir ima17.png a la raíz del proyecto -->
                             <img src="./ima17.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima17.png'" alt="Persona meditando calmadamente" class="accordion-image mr-4 cursor-pointer">
-                            #3. Técnica Antiestrés: Respiración 4x4
-                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-antiestres" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <div class="accordion-title-container">
+                                <span class="font-bold">#3. Técnica Antiestrés: Respiración 4x4</span>
+                                <svg class="w-4 h-4 accordion-arrow" id="arrow-content-antiestres" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
                         </button>
                         <div id="content-antiestres" class="accordion-content">
                             <p class="text-gray-700 mb-2 font-semibold">Usa tu respiración para apagar la ansiedad, es 100% natural:</p>
@@ -625,8 +687,10 @@
                         <button class="accordion-button bg-green-100 text-green-700 hover:bg-green-200" onclick="toggleAccordion('content-balanza')">
                             <!-- NOTA: Subir ima18.png a la raíz del proyecto -->
                             <img src="./ima18.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima18.png'" alt="Una balanza de justicia" class="accordion-image mr-4 cursor-pointer">
-                            #1. La Balanza de tu Decisión (Balance Decisional)
-                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-balanza" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <div class="accordion-title-container">
+                                <span class="font-bold">#1. La Balanza de tu Decisión (Balance Decisional)</span>
+                                <svg class="w-4 h-4 accordion-arrow" id="arrow-content-balanza" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
                         </button>
                         <div id="content-balanza" class="accordion-content">
                             <p class="text-gray-700 mb-2 font-semibold">Antes de hacer algo, ponlo en una balanza. Decidir bien es ver el panorama completo.</p>
@@ -639,8 +703,10 @@
                         <button class="accordion-button bg-green-100 text-green-700 hover:bg-green-200" onclick="toggleAccordion('content-factores')">
                             <!-- NOTA: Subir ima19.png a la raíz del proyecto -->
                             <img src="./ima19.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima19.png'" alt="Adolescente reflexivo" class="accordion-image mr-4 cursor-pointer">
-                            #2. Factores de Riesgo (Familiar y Social)
-                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-factores" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <div class="accordion-title-container">
+                                <span class="font-bold">#2. Factores de Riesgo (Familiar y Social)</span>
+                                <svg class="w-4 h-4 accordion-arrow" id="arrow-content-factores" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
                         </button>
                         <div id="content-factores" class="accordion-content">
                             <p class="text-gray-700 mb-4">Estos factores externos pueden aumentar el riesgo. Identificarlos es el primer paso para cambiar la situación.</p>
@@ -656,8 +722,10 @@
                         <button class="accordion-button bg-green-100 text-green-700 hover:bg-green-200" onclick="toggleAccordion('content-autoestima')">
                             <!-- NOTA: Subir ima20.png a la raíz del proyecto -->
                             <img src="./ima20.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima20.png'" alt="Joven con brazos levantados celebrando" class="accordion-image mr-4 cursor-pointer">
-                             #3. Tu Escudo Protector: ¡La Autoestima!
-                            <svg class="w-4 h-4 accordion-arrow" id="arrow-content-autoestima" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <div class="accordion-title-container">
+                                <span class="font-bold">#3. Tu Escudo Protector: ¡La Autoestima!</span>
+                                <svg class="w-4 h-4 accordion-arrow" id="arrow-content-autoestima" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
                         </button>
                         <div id="content-autoestima" class="accordion-content">
                             <p class="text-gray-700 mb-2 font-semibold">Una <strong>Autoestima Alta</strong> te da la seguridad para ser tú mismo/a y rechazar lo que te hace daño. Acéptate y no busques la aprobación de otros.</p>
@@ -684,8 +752,10 @@
                 <button class="accordion-button bg-indigo-100 text-indigo-700 hover:bg-indigo-200" onclick="toggleAccordion('content-asertividad-test')">
                     <!-- NOTA: Subir ima21.png a la raíz del proyecto -->
                     <img src="./ima21.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima21.png'" alt="Persona con un checklist gigante" class="accordion-image mr-4 cursor-pointer">
-                    #1. ¿Qué Estilo de Comunicación Tienes? (Test de Asertividad)
-                    <svg class="w-4 h-4 accordion-arrow" id="arrow-content-asertividad-test" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <div class="accordion-title-container">
+                        <span class="font-bold">#1. ¿Qué Estilo de Comunicación Tienes? (Test de Asertividad)</span>
+                        <svg class="w-4 h-4 accordion-arrow" id="arrow-content-asertividad-test" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
                 </button>
                 <div id="content-asertividad-test" class="accordion-content">
                     <p class="text-gray-700 mb-4">Descubre si tu forma de hablar es <strong>Pasiva, Agresiva o Asertiva</strong>. ¡Marca con cuál te identificas más!</p>
@@ -706,8 +776,10 @@
                 <button class="accordion-button bg-green-100 text-green-700 hover:bg-green-200" onclick="toggleAccordion('content-consumo-test')">
                     <!-- NOTA: Subir ima22.png a la raíz del proyecto -->
                     <img src="./ima22.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima22.png'" alt="Cuestionario o evaluación médica" class="accordion-image mr-4 cursor-pointer">
-                    #2. ¿Qué Tanto Fumas? (Test de Evaluación de Consumo)
-                    <svg class="w-4 h-4 accordion-arrow" id="arrow-content-consumo-test" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <div class="accordion-title-container">
+                        <span class="font-bold">#2. ¿Qué Tanto Fumas? (Test de Evaluación de Consumo)</span>
+                        <svg class="w-4 h-4 accordion-arrow" id="arrow-content-consumo-test" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
                 </button>
                 <div id="content-consumo-test" class="accordion-content">
                     <p class="text-gray-700 mb-4">Evalúa tu consumo en los últimos 3 meses y descubre tu nivel de riesgo. ¡Sé honesto!</p>
@@ -728,8 +800,10 @@
                 <button class="accordion-button bg-yellow-100 text-yellow-700 hover:bg-yellow-200" onclick="toggleAccordion('content-semaforo')">
                     <!-- NOTA: Subir ima23.png a la raíz del proyecto -->
                     <img src="./ima23.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima23.png'" alt="Señales de alerta o semáforo" class="accordion-image mr-4 cursor-pointer">
-                    #3. ¡Semáforo de Alerta! ¿Necesitas ayuda?
-                    <svg class="w-4 h-4 accordion-arrow" id="arrow-content-semaforo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <div class="accordion-title-container">
+                        <span class="font-bold">#3. ¡Semáforo de Alerta! ¿Necesitas ayuda?</span>
+                        <svg class="w-4 h-4 accordion-arrow" id="arrow-content-semaforo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
                 </button>
                 <div id="content-semaforo" class="accordion-content">
                     <p class="text-gray-700 mb-4">Marca las señales de alerta. Al terminar, recibirás un mensaje asertivo.</p>
@@ -750,8 +824,10 @@
                 <button class="accordion-button bg-indigo-100 text-indigo-700 hover:bg-indigo-200" onclick="toggleAccordion('content-personal-test')">
                     <!-- NOTA: Subir ima24.png a la raíz del proyecto -->
                      <img src="./ima24.png" onclick="openLightbox(this.src)" onerror="this.onerror=null; this.src='https://placehold.co/600x120/f9fafb/374151?text=Subir+ima24.png'" alt="Persona con un checklist gigante" class="accordion-image mr-4 cursor-pointer">
-                    #4. ¿Qué Tanta Protección Tienes? (Test Personal)
-                    <svg class="w-4 h-4 accordion-arrow" id="arrow-content-personal-test" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                     <div class="accordion-title-container">
+                        <span class="font-bold">#4. ¿Qué Tanta Protección Tienes? (Test Personal)</span>
+                        <svg class="w-4 h-4 accordion-arrow" id="arrow-content-personal-test" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
                 </button>
                 <div id="content-personal-test" class="accordion-content">
                     <p class="text-gray-700 mb-4">¡Checa si tus hábitos personales te dan la <strong>protección</strong> que necesitas! Marca los factores que apliquen en tu vida.</p>
@@ -1047,13 +1123,11 @@
         // --- Funcionalidad de Acordeón (Toggle) ---
         function toggleAccordion(contentId) {
             const content = document.getElementById(contentId);
-            // CORRECCIÓN: Buscamos el ID de la flecha con el prefijo 'arrow-' más el ID completo del contenido.
             const arrow = document.getElementById('arrow-' + contentId);
             
             if (content) {
                 content.classList.toggle('open');
             }
-            // Solo intentamos modificar la clase si la flecha existe
             if (arrow) {
                  arrow.classList.toggle('open');
             }
@@ -1324,7 +1398,7 @@
                 style = 'bg-orange-100 border-l-4 border-orange-500';
             } else { // 7 o más
                 riesgo = 'Severo';
-                message = `<p class="font-black text-xl mb-2 text-red-800">Nivel de Riesgo: ${riesgo} (${totalScore} puntos) ❌</p>
+                message = `<p class="font-black text-xl mb-2 text-red-800">Nivel de Riesgo: ${riesgo} (${totalScore} puntos)❌</p>
                            <p>La necesidad física por el tabaco es ALTA. Puede ser una parte importante de tu vida para aliviar la ansiedad. Es URGENTE que busques ayuda profesional. Llama ahora al CIJ. <strong>Tu salud es lo primero.</strong></p>`;
                 style = 'bg-red-100 border-l-4 border-red-500';
             }
@@ -1370,20 +1444,25 @@
 
         // Renders CIJ Info Block with Map
         function renderCIJBlocks() {
-            // TELÉFONO DE SOPORTE ACTUALIZADO A CIJ NACIONAL
+            // DATOS ACTUALIZADOS: Dirección y Teléfono Nacional (CIJ NACIONAL)
+            const direccionCIJ = "Av. de los Maestros 336, Doctores, 50060 Toluca de Lerdo, Méx.";
+            const telLocalCIJ = "+52 722 213 0378";
+            const telNacionalCIJ = "55 5212 1212";
+            const mapsEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3765.626857646725!2d-99.64567352406016!3d19.29858654494562!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d20aa65a044a2b%3A0x8e83348636d10c1!2sAv.%20de%20los%20Maestros%20336%2C%20Doctores%2C%2050060%20Toluca%20de%20Lerdo%2C%20M%C3%A9x.!5e0!3m2!1ses!2smx!4v1700000000000!5m2!1ses!2smx"; 
+
             const cijHtml = `
                 <div class="bg-indigo-700 text-white p-6 rounded-lg text-center mt-6">
                     <h3 class="text-2xl font-black mb-3 text-yellow-500">¿Necesitas Ayuda o Más Info?</h3>
                     <p class="mb-4 text-indigo-100">Si sientes que necesitas hablar con alguien o tienes dudas, contacta a los expertos de los <strong>Centros de Integración Juvenil (CIJ)</strong>.</p>
                     
-                    <!-- Google Maps Iframe (UPDATED URL) -->
+                    <!-- Google Maps Iframe (NUEVA DIRECCIÓN) -->
                     <div class="w-full h-48 bg-gray-200 rounded-lg overflow-hidden mb-4">
                         <iframe 
                             width="100%" 
                             height="100%" 
                             frameborder="0" 
                             style="border:0;" 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3765.626857646725!2d-99.64567352406016!3d19.29858654494562!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cd89eb33eeccd9%3A0xd8307b5c7752f111!2sCIJ%20centro%20de%20integraci%C3%B3n%20juvenil!5e0!3m2!1ses!2smx!4v1763496430928!5m2!1ses!2smx"
+                            src="${mapsEmbedUrl}"
                             allowfullscreen="" 
                             loading="lazy" 
                             referrerpolicy="no-referrer-when-downgrade">
@@ -1392,9 +1471,9 @@
 
                     <div class="mt-4 bg-indigo-900 p-4 rounded-xl inline-block shadow-lg w-full max-w-sm">
                         <p class="font-bold text-lg text-red-400">CIJ - Centro de Atención Ciudadana</p>
-                        <p class="mb-1 text-base">Dirección (Edo. Mex.): <span class="text-white font-medium">Calle Morelos Sur 730, Delegación San Sebastián, 50150 Toluca de Lerdo, Méx.</span></p>
-                        <p class="mb-1 text-base">Teléfono de Apoyo (CIJ Local): <span class="text-white font-mono text-xl">+52 722 213 0378</span></p>
-                        <p class="text-sm mt-2 text-gray-400">CIJ NACIONAL: 55 5212 1212</p>
+                        <p class="mb-1 text-base">Dirección (Toluca): <span class="text-white font-medium">${direccionCIJ}</span></p>
+                        <p class="mb-1 text-base">Teléfono de Apoyo (Local): <span class="text-white font-mono text-xl">${telLocalCIJ}</span></p>
+                        <p class="text-sm mt-2 text-gray-400">CIJ NACIONAL: ${telNacionalCIJ}</p>
                     </div>
                 </div>
             `;
